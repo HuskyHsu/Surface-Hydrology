@@ -1,0 +1,3 @@
+__pycache__
+*.pyc
+SurfaceHydrology/settings_secret.py
