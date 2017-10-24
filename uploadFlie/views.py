@@ -1,18 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from .process import LHC
 
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
 
 def post_file(request):
-    print('成功惹!?')
-    
-    if request.method != 'POST':
+    # POST and have file
+    if request.method == 'POST' and request.FILES != {}:
+
+        data = LHC.Capa3(request.FILES['file'])
+        print(data)
+
+        return JsonResponse({
+                'success': True,
+                })
+
+    else:
         return JsonResponse({
             'success': False,
             })
 
-    return JsonResponse({
-            'success': True,
-            })
+
