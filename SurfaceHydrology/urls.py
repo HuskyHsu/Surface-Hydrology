@@ -18,11 +18,11 @@ from django.contrib import admin
 
 from home import views as home_views
 # from uploadFlie import views as upload_views
-from uploadFlie import urls as uploadFlie_urls
+from uploadFile import urls as uploadFile_urls
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url(r'^$', home_views.home_page, name='home'),
     # url(r'^upload$', upload_views.home_page, name='upload'),
-    url(r'^upload/', include(uploadFlie_urls)),
+    url(r'^upload/', include(uploadFile_urls)),
 ]

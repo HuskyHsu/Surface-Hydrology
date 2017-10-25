@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class UploadflieConfig(AppConfig):
-    name = 'uploadFlie'
+    name = 'uploadFile'
