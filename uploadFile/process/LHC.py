@@ -1,5 +1,6 @@
 import csv
 import datetime
+from django.db import connection
 
 def formatData(file):
     for chunk in file.chunks():
@@ -32,28 +33,52 @@ def trvalue(a, b, value):
     except:
         print(value)
 
-def Capa3(file):
-    lines = formatData(file)
+class siteObject(object):
+    tableName = ""
+    field = []
+    data = []
 
-    for i, line in enumerate(lines):
-        TIMESTAMP = formatTime(line[1], line[2], line[3])
+    def get_para(self):
+        return (self.tableName, self.field, self.data)
 
-        T = [line[13]]
-        T.extend(line[4:7])
-        T = [None if float(w) <= 0 else w for w in T]
+    def insert(self):
+        SQLString = 'INSERT INTO {} ({}) VALUES ({})'.format(self.tableName, ','.join(self.field), ','.join(['%s']*len(self.field)))
+        with connection.cursor() as cursor:
+            try:
+                cursor.executemany(SQLString, self.data)
+            except:
+                cursor.close()
+                return False
+        return True
 
-        data = [TIMESTAMP]
-        data.extend(T)
+class Capa3(siteObject):
+    tableName = 'RAWDATA_Capa3'
+    field = ['TIMESTAMP', 'T0', 'T10', 'T30', 'T50', 'SF10', 'SF30', 'SF50', 'SF70', 'SF90']
+    
+    def readFile(self, file):
+        lines = formatData(file)
 
-        data += [trvalue(0.9304, 2.0575, line[7])]
-        data += [trvalue(0.6961, 2.3896, line[8])]
-        data += [trvalue(0.6961, 2.3896, line[9])]
-        data += [trvalue(0.6961, 2.3896, line[10])]
-        data += [trvalue(0.6961, 2.3896, line[11])]
+        for i, line in enumerate(lines):
+            TIMESTAMP = formatTime(line[1], line[2], line[3])
 
-        lines[i] = data
+            T = [line[13]]
+            T.extend(line[4:7])
+            T = [None if float(w) <= 0 else w for w in T]
+
+            data = [TIMESTAMP]
+            data.extend(T)
+
+            data += [trvalue(0.9304, 2.0575, line[7])]
+            data += [trvalue(0.6961, 2.3896, line[8])]
+            data += [trvalue(0.6961, 2.3896, line[9])]
+            data += [trvalue(0.6961, 2.3896, line[10])]
+            data += [trvalue(0.6961, 2.3896, line[11])]
+
+            lines[i] = data
+        self.data = lines
+        return self
 
 
-    return lines
-
-
+class Site(object):
+    def create(self, typ):
+        return globals()[typ]()

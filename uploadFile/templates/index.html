@@ -13,8 +13,15 @@
 
 <body>
     <form method="post" action="/upload/file" enctype="multipart/form-data">
-        <input name="file" type="file">
-        <input type="submit" value="送出">
+        測站名稱:<br>
+        <select name="site">
+            <option value="Capa2">Capa2</option>
+            <option value="Capa3">Capa3</option>
+            <option value="Capa4">Capa4</option>
+        </select><br>
+        檔案:<br>
+        <input name="file" type="file"><br><br>
+        <input type="submit" value="上傳">
         {% csrf_token %}
     </form>
 
