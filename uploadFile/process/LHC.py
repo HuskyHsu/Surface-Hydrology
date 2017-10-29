@@ -51,6 +51,30 @@ class siteObject(object):
                 return False
         return True
 
+class Capa2(siteObject):
+    tableName = 'RAWDATA_Capa2'
+    field = ['TIMESTAMP', 'T0', 'T10', 'T30', 'T50', 'T150', 'SF10', 'SF30', 'SF50', 'SF70', 'SF90']
+
+    def readFile(self, file):
+        lines = formatData(file)
+
+        for i, line in enumerate(lines):
+            TIMESTAMP = formatTime(line[1], line[2], line[3])
+
+            data = [TIMESTAMP]
+            line[5:10] = [w if 0 <= float(w) < 200 else None for w in line[5:10]]
+            data.extend(line[5:10])
+
+            data += [trvalue(0.9304, 2.0575, line[10])]
+            data += [trvalue(0.6961, 2.3896, line[11])]
+            data += [trvalue(0.6961, 2.3896, line[12])]
+            data += [trvalue(0.6961, 2.3896, line[13])]
+            data += [trvalue(0.6961, 2.3896, line[14])]
+
+            lines[i] = data
+        self.data = lines
+        return self
+
 class Capa3(siteObject):
     tableName = 'RAWDATA_Capa3'
     field = ['TIMESTAMP', 'T0', 'T10', 'T30', 'T50', 'SF10', 'SF30', 'SF50', 'SF70', 'SF90']
@@ -63,7 +87,7 @@ class Capa3(siteObject):
 
             T = [line[13]]
             T.extend(line[4:7])
-            T = [None if float(w) <= 0 else w for w in T]
+            T = [w if 0 <= float(w) < 200 else None for w in T]
 
             data = [TIMESTAMP]
             data.extend(T)
@@ -78,6 +102,24 @@ class Capa3(siteObject):
         self.data = lines
         return self
 
+class Capa4(siteObject):
+    tableName = 'RAWDATA_Capa4'
+    field = ['TIMESTAMP', 'WS_ms_Avg', 'WindDir', 'AirTC_20_Avg', 'RH_20', 'AirTC_15_Avg', 'RH_15', 'AirTC_10_Avg', 'RH_10', 'AirTC_5_Avg', 'RH_5', 'NR_Wm2_Avg', 'SEVolt_Avg', 'Temp_C_Avg(1)', 'Temp_C_Avg(2)', 'Temp_C_Avg(3)', 'Temp_C_Avg(4)', 'Temp_C_Avg(5)', 'Temp_C_Avg(6)', 'Result1_Avg', 'Result2_Avg', 'Result3_Avg', 'Result4_Avg', 'Result5_Avg', 'Inf_data', 'Temp_C_Avg(7)', 'Rain_mm_Tot', 'Pressure_Avg']
+    
+    def readFile(self, file):
+        lines = formatData(file)
+        lines.pop(0)
+
+        for i, line in enumerate(lines):
+            TIMESTAMP = str(datetime.datetime.strptime(line[0], '%Y/%m/%d %H%M'))
+
+            data = [TIMESTAMP]
+            data.extend(line[2:])
+
+            lines[i] = data
+
+        self.data = lines
+        return self
 
 class Site(object):
     def create(self, typ):

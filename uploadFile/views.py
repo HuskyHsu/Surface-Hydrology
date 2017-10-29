@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from .process import LHC, connDB
+from .process import LHC
 
 from django.db import connection
 
