@@ -59,19 +59,19 @@ class RawdataCapa4(models.Model):
     rh_5 = models.DecimalField(db_column='RH_5', max_digits=6, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
     nr_wm2_avg = models.DecimalField(db_column='NR_Wm2_Avg', max_digits=9, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
     sevolt_avg = models.DecimalField(db_column='SEVolt_Avg', max_digits=7, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
-    temp_c_avg_1_field = models.DecimalField(db_column='Temp_C_Avg(1)', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
-    temp_c_avg_2_field = models.DecimalField(db_column='Temp_C_Avg(2)', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
-    temp_c_avg_3_field = models.DecimalField(db_column='Temp_C_Avg(3)', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
-    temp_c_avg_4_field = models.DecimalField(db_column='Temp_C_Avg(4)', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
-    temp_c_avg_5_field = models.DecimalField(db_column='Temp_C_Avg(5)', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
-    temp_c_avg_6_field = models.DecimalField(db_column='Temp_C_Avg(6)', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    temp_c_avg_1_field = models.DecimalField(db_column='Temp_C_Avg_1', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    temp_c_avg_2_field = models.DecimalField(db_column='Temp_C_Avg_2', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    temp_c_avg_3_field = models.DecimalField(db_column='Temp_C_Avg_3', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    temp_c_avg_4_field = models.DecimalField(db_column='Temp_C_Avg_4', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    temp_c_avg_5_field = models.DecimalField(db_column='Temp_C_Avg_5', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    temp_c_avg_6_field = models.DecimalField(db_column='Temp_C_Avg_6', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
     result1_avg = models.DecimalField(db_column='Result1_Avg', max_digits=4, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
     result2_avg = models.DecimalField(db_column='Result2_Avg', max_digits=4, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
     result3_avg = models.DecimalField(db_column='Result3_Avg', max_digits=4, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
     result4_avg = models.DecimalField(db_column='Result4_Avg', max_digits=4, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
     result5_avg = models.DecimalField(db_column='Result5_Avg', max_digits=4, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
     inf_data = models.DecimalField(db_column='Inf_data', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-    temp_c_avg_7_field = models.DecimalField(db_column='Temp_C_Avg(7)', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    temp_c_avg_7_field = models.DecimalField(db_column='Temp_C_Avg_7', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
     rain_mm_tot = models.DecimalField(db_column='Rain_mm_Tot', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
     pressure_avg = models.DecimalField(db_column='Pressure_Avg', max_digits=8, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
 

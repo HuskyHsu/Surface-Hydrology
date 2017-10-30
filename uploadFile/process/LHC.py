@@ -1,6 +1,7 @@
 import csv
 import datetime
 from django.db import connection
+import sys
 
 def formatData(file):
     for chunk in file.chunks():
@@ -11,7 +12,7 @@ def formatData(file):
         lines.pop()
     
     # remove "" to None
-    return [[None if value == "" else value for value in line] for line in lines]
+    return [[None if (value == "" or value == '"NAN"') else value for value in line] for line in lines]
 
 def formatTime(year, jd, hm):
     hm = '{}{}'.format('0'*(4-len(hm)), hm) if len(hm) < 4 else '2359' if hm == '2400' else hm
@@ -43,11 +44,13 @@ class siteObject(object):
 
     def insert(self):
         SQLString = 'INSERT INTO {} ({}) VALUES ({})'.format(self.tableName, ','.join(self.field), ','.join(['%s']*len(self.field)))
+        print(SQLString)
         with connection.cursor() as cursor:
             try:
                 cursor.executemany(SQLString, self.data)
             except:
                 cursor.close()
+                print(sys.exc_info()[0])
                 return False
         return True
 
@@ -104,14 +107,14 @@ class Capa3(siteObject):
 
 class Capa4(siteObject):
     tableName = 'RAWDATA_Capa4'
-    field = ['TIMESTAMP', 'WS_ms_Avg', 'WindDir', 'AirTC_20_Avg', 'RH_20', 'AirTC_15_Avg', 'RH_15', 'AirTC_10_Avg', 'RH_10', 'AirTC_5_Avg', 'RH_5', 'NR_Wm2_Avg', 'SEVolt_Avg', 'Temp_C_Avg(1)', 'Temp_C_Avg(2)', 'Temp_C_Avg(3)', 'Temp_C_Avg(4)', 'Temp_C_Avg(5)', 'Temp_C_Avg(6)', 'Result1_Avg', 'Result2_Avg', 'Result3_Avg', 'Result4_Avg', 'Result5_Avg', 'Inf_data', 'Temp_C_Avg(7)', 'Rain_mm_Tot', 'Pressure_Avg']
+    field = ["TIMESTAMP", "WS_ms_Avg", "WindDir", "AirTC_20_Avg", "RH_20", "AirTC_15_Avg", "RH_15", "AirTC_10_Avg", "RH_10", "AirTC_5_Avg", "RH_5", "NR_Wm2_Avg", "SEVolt_Avg", "Temp_C_Avg_1", "Temp_C_Avg_2", "Temp_C_Avg_3", "Temp_C_Avg_4", "Temp_C_Avg_5", "Temp_C_Avg_6", "Result1_Avg", "Result2_Avg", "Result3_Avg", "Result4_Avg", "Result5_Avg", "Inf_data", "Temp_C_Avg_7", "Rain_mm_Tot", "Pressure_Avg"]
     
     def readFile(self, file):
         lines = formatData(file)
-        lines.pop(0)
+        del lines[0:4]
 
         for i, line in enumerate(lines):
-            TIMESTAMP = str(datetime.datetime.strptime(line[0], '%Y/%m/%d %H%M'))
+            TIMESTAMP = str(datetime.datetime.strptime(line[0], '"%Y-%m-%d %H:%M:%S"'))
 
             data = [TIMESTAMP]
             data.extend(line[2:])
