@@ -27,19 +27,21 @@ def post_file(request):
     # POST and have file
     if request.method == 'POST' and request.FILES != {}:
 
-        success = {}
+        success = []
         for file in request.FILES.keys():
 
             site = LHC.Site().create(file)
-            success[file] = site.readFile(request.FILES[file]).insert()
+            success.append({ "name": file, "result": site.readFile(request.FILES[file]).insert()})
 
-        return JsonResponse({
-                'success': success,
-                })
+        return render(request, 'checkPage.html', {"success": success, "date": request.POST["date"] })
+        # return JsonResponse({
+        #         'success': success,
+        #         })
 
     else:
-        return JsonResponse({
-            'success': False,
-            })
+        return render(request, 'checkPage.html', {'success': []})
+        # return JsonResponse({
+        #     'success': False,
+        #     })
 
 

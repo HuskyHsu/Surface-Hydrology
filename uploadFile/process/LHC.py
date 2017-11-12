@@ -56,7 +56,7 @@ class siteObject(object):
                 cursor.executemany(SQLString, self.data)
             except:
                 cursor.close()
-                print(sys.exc_info()[0])
+                # print(sys.exc_info()[0])
                 return False
         return True
 

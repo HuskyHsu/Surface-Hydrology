@@ -1,0 +1,14 @@
+{% extends "..\..\home\templates\home.html" %}
+
+{% block body %}
+
+<h1 class="title">{{ date }}</h1>
+
+<ul>
+    {% for site in success %}
+    <li>{{ site.name }} : {{ site.result }}</li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}
