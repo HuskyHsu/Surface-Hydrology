@@ -8,10 +8,15 @@ def formatData(file):
         tem = chunk.decode().split('\r\n')
 
     lines = [row.split(',') for row in tem]
+    # remove no data line
     if len(lines[-1]) <= 1:
         lines.pop()
     
-    # remove "" to None
+    # remove first line if have not match array number
+    if len(lines[0]) != len(lines[1]):
+        lines.pop(0)
+    
+    # remove "" and "NAN" to None
     return [[None if (value == "" or value == '"NAN"') else value for value in line] for line in lines]
 
 def formatTime(year, jd, hm):
