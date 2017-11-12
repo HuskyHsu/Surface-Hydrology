@@ -43,7 +43,8 @@ class siteObject(object):
         return (self.tableName, self.field, self.data)
 
     def insert(self):
-        SQLString = 'INSERT INTO {} ({}) VALUES ({})'.format(self.tableName, ','.join(self.field), ','.join(['%s']*len(self.field)))
+        SQLString = 'INSERT IGNORE INTO {} ({}) VALUES ({})'.format(self.tableName, ','.join(self.field), ','.join(['%s']*len(self.field)))
+        
         print(SQLString)
         with connection.cursor() as cursor:
             try:
@@ -76,6 +77,7 @@ class Capa2(siteObject):
 
             lines[i] = data
         self.data = lines
+        self.data.sort(key=lambda x: x[0])
         return self
 
 class Capa3(siteObject):
