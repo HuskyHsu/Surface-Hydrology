@@ -19,10 +19,12 @@ from django.contrib import admin
 from home import views as home_views
 # from uploadFlie import views as upload_views
 from uploadFile import urls as uploadFile_urls
+from getData import urls as getData_urls
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url(r'^$', home_views.home_page, name='home'),
     # url(r'^upload$', upload_views.home_page, name='upload'),
     url(r'^upload/', include(uploadFile_urls)),
+    url(r'^data/', include(getData_urls)),
 ]

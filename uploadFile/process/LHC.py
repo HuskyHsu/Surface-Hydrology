@@ -43,6 +43,7 @@ class siteObject(object):
     tableName = ""
     field = []
     data = []
+    ReceiveDate = ""
 
     def get_para(self):
         return (self.tableName, self.field, self.data)
@@ -62,9 +63,9 @@ class siteObject(object):
 
 class Capa2(siteObject):
     tableName = 'RAWDATA_Capa2'
-    field = ['TIMESTAMP', 'T0', 'T10', 'T30', 'T50', 'T150', 'SF10', 'SF30', 'SF50', 'SF70', 'SF90']
+    field = ['TIMESTAMP', 'T0', 'T10', 'T30', 'T50', 'T150', 'SF10', 'SF30', 'SF50', 'SF70', 'SF90', 'ReceiveDate']
 
-    def readFile(self, file):
+    def readFile(self, file, ReceiveDate):
         lines = formatData(file)
 
         for i, line in enumerate(lines):
@@ -79,6 +80,7 @@ class Capa2(siteObject):
             data += [trvalue(0.6961, 2.3896, line[12])]
             data += [trvalue(0.6961, 2.3896, line[13])]
             data += [trvalue(0.6961, 2.3896, line[14])]
+            data += [ReceiveDate]
 
             lines[i] = data
         self.data = lines
@@ -87,9 +89,9 @@ class Capa2(siteObject):
 
 class Capa3(siteObject):
     tableName = 'RAWDATA_Capa3'
-    field = ['TIMESTAMP', 'T0', 'T10', 'T30', 'T50', 'SF10', 'SF30', 'SF50', 'SF70', 'SF90']
+    field = ['TIMESTAMP', 'T0', 'T10', 'T30', 'T50', 'SF10', 'SF30', 'SF50', 'SF70', 'SF90', 'ReceiveDate']
     
-    def readFile(self, file):
+    def readFile(self, file, ReceiveDate):
         lines = formatData(file)
 
         for i, line in enumerate(lines):
@@ -107,6 +109,8 @@ class Capa3(siteObject):
             data += [trvalue(0.6961, 2.3896, line[9])]
             data += [trvalue(0.6961, 2.3896, line[10])]
             data += [trvalue(0.6961, 2.3896, line[11])]
+            
+            data += [ReceiveDate]
 
             lines[i] = data
         self.data = lines
@@ -114,9 +118,9 @@ class Capa3(siteObject):
 
 class Capa4(siteObject):
     tableName = 'RAWDATA_Capa4'
-    field = ["TIMESTAMP", "WS_ms_Avg", "WindDir", "AirTC_20_Avg", "RH_20", "AirTC_15_Avg", "RH_15", "AirTC_10_Avg", "RH_10", "AirTC_5_Avg", "RH_5", "NR_Wm2_Avg", "SEVolt_Avg", "Temp_C_Avg_1", "Temp_C_Avg_2", "Temp_C_Avg_3", "Temp_C_Avg_4", "Temp_C_Avg_5", "Temp_C_Avg_6", "Result1_Avg", "Result2_Avg", "Result3_Avg", "Result4_Avg", "Result5_Avg", "Inf_data", "Temp_C_Avg_7", "Rain_mm_Tot", "Pressure_Avg"]
+    field = ["TIMESTAMP", "WS_ms_Avg", "WindDir", "AirTC_20_Avg", "RH_20", "AirTC_15_Avg", "RH_15", "AirTC_10_Avg", "RH_10", "AirTC_5_Avg", "RH_5", "NR_Wm2_Avg", "SEVolt_Avg", "Temp_C_Avg_1", "Temp_C_Avg_2", "Temp_C_Avg_3", "Temp_C_Avg_4", "Temp_C_Avg_5", "Temp_C_Avg_6", "Result1_Avg", "Result2_Avg", "Result3_Avg", "Result4_Avg", "Result5_Avg", "Inf_data", "Temp_C_Avg_7", "Rain_mm_Tot", "Pressure_Avg", "ReceiveDate"]
     
-    def readFile(self, file):
+    def readFile(self, file, ReceiveDate):
         lines = formatData(file)
         del lines[0:4]
 
@@ -125,6 +129,8 @@ class Capa4(siteObject):
 
             data = [TIMESTAMP]
             data.extend(line[2:])
+
+            data += [ReceiveDate]
 
             lines[i] = data
 
