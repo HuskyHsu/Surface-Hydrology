@@ -48,10 +48,10 @@ class siteObject(object):
     def get_para(self):
         return (self.tableName, self.field, self.data)
 
+    # 插入資料庫
     def insert(self):
         SQLString = 'INSERT IGNORE INTO {} ({}) VALUES ({})'.format(self.tableName, ','.join(self.field), ','.join(['%s']*len(self.field)))
-        
-        print(SQLString)
+
         with connection.cursor() as cursor:
             try:
                 cursor.executemany(SQLString, self.data)
@@ -60,6 +60,41 @@ class siteObject(object):
                 # print(sys.exc_info()[0])
                 return False
         return True
+
+    # 統計資料
+    def status(self):
+        SQLString = 'select ReceiveDate, count(*) count, min(TIMESTAMP) min, max(TIMESTAMP) max from {} group by ReceiveDate'.format(self.tableName)
+        with connection.cursor() as cursor:
+            try:
+                cursor.execute(SQLString)
+
+                columns = [column[0] for column in cursor.description]
+                results = []
+                for row in cursor.fetchall():
+                    results.append(dict(zip(columns, row)))
+
+            except:
+                cursor.close()
+                # print(sys.exc_info()[0])
+                return False
+        return results
+
+    def timeSeries(self, startTime, endTime):
+        SQLString = 'select * from {} where TIMESTAMP BETWEEN %s and %s'.format(self.tableName)
+        with connection.cursor() as cursor:
+            try:
+                cursor.execute(SQLString, [startTime, endTime])
+
+                columns = [column[0] for column in cursor.description]
+                results = []
+                for row in cursor.fetchall():
+                    results.append(dict(zip(columns, row)))
+
+            except:
+                cursor.close()
+                # print(sys.exc_info()[0])
+                return False
+        return results
 
 class Capa2(siteObject):
     tableName = 'RAWDATA_Capa2'
