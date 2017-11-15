@@ -2,6 +2,7 @@ import csv
 import datetime
 from django.db import connection
 import sys
+from SurfaceHydrology.settings_secret import create_aiomysql
 
 def formatData(file):
     for chunk in file.chunks():
@@ -58,10 +59,23 @@ class siteObject(object):
             except:
                 cursor.close()
                 # print(sys.exc_info()[0])
-                return False
-        return True
+                return {"name": self.__class__.__name__, "result": False}
+        return {"name": self.__class__.__name__, "result": True}
 
-    # 統計資料
+    # async 插入資料庫
+    async def asyncInsert(self, loop):
+        async with create_aiomysql(loop) as pool:
+            async with pool.get() as conn:
+                async with conn.cursor() as cur:
+                    SQLString = 'INSERT IGNORE INTO {} ({}) VALUES ({})'.format(self.tableName, ','.join(self.field), ','.join(['%s']*len(self.field)))
+                    try:
+                        await cur.executemany(SQLString, self.data)
+                    except:
+                        cur.close()
+                        return {"name": self.__class__.__name__, "result": False}
+                return {"name": self.__class__.__name__, "result": True}
+
+    # 取得統計資料
     def status(self):
         SQLString = 'select ReceiveDate, count(*) count, min(TIMESTAMP) min, max(TIMESTAMP) max from {} group by ReceiveDate'.format(self.tableName)
         with connection.cursor() as cursor:
@@ -79,6 +93,7 @@ class siteObject(object):
                 return False
         return results
 
+    # 取得時序資料
     def timeSeries(self, startTime, endTime):
         SQLString = 'select * from {} where TIMESTAMP BETWEEN %s and %s'.format(self.tableName)
         with connection.cursor() as cursor:
