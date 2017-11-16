@@ -34,30 +34,24 @@ def post_file(request):
     if request.method == 'POST' and request.FILES != {}:
 
         start = now()
-        success = []
-        tasks = []
 
+        # OPEN async
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         # loop = asyncio.get_event_loop()
-        for file in request.FILES.keys():
 
-            # async 處理
-            site = LHC.Site().create(file)
-            site.readFile(request.FILES[file], request.POST["date"])
-            tasks.append( asyncio.ensure_future(site.asyncInsert(loop)) )
+        # create coroutine object
+        tasks = [ asyncio.ensure_future(
+            LHC.Site().create(file)
+                .readFile( request.FILES[file], request.POST["date"] )
+                .asyncInsert(loop)
+            ) for file in request.FILES.keys()]
 
-            # 同步處理
-            '''
-            site = LHC.Site().create(file)
-            site.readFile(request.FILES[file], request.POST["date"])
-            success.append(site.insert())
-            '''
-        
+        # run async
         loop.run_until_complete(asyncio.wait(tasks))
 
-        for task in tasks:
-            success.append(task.result())
+        # get return value
+        success = [task.result() for task in tasks]
 
         print('TIME: ', now() - start)
         return render(request, 'checkPage.html', {"success": success, "date": request.POST["date"] })

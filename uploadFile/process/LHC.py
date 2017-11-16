@@ -70,6 +70,7 @@ class siteObject(object):
                     SQLString = 'INSERT IGNORE INTO {} ({}) VALUES ({})'.format(self.tableName, ','.join(self.field), ','.join(['%s']*len(self.field)))
                     try:
                         await cur.executemany(SQLString, self.data)
+                        await conn.commit()
                     except:
                         cur.close()
                         return {"name": self.__class__.__name__, "result": False}
