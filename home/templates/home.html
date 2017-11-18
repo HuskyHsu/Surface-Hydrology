@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block body %}
-
 <div class="tile is-ancestor">
     <div class="tile is-4 is-vertical is-parent">
         <div class="tile is-child box">
@@ -11,9 +10,9 @@
                 <div class="control">
                     <div class="select">
                         <select>
-                            <option value="Capa2">Capa2</option>
-                            <option value="Capa3">Capa3</option>
-                            <option value="Capa4">Capa4</option>
+                            {% for site in siteBasic %}
+                            <option value="{{site.name}}">{{site.name}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -36,16 +35,17 @@
                 </div>
             </div>
 
-            <label class="checkbox">
-                <input type="checkbox"> 項目一
-            </label>
-            <label class="checkbox">
-                <input type="checkbox"> 項目二
-            </label>
+            {% for site in siteBasic %}
+            <div class="select">
+                <select>
+                    {% for field in site.field %}
+                    <option value="{{field}}">{{field}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endfor %}
+
         </div>
-        <!-- <div class="tile is-child box">
-            <p class="title">Two</p>
-        </div> -->
     </div>
     <div class="tile is-parent">
         <div class="tile is-child box">

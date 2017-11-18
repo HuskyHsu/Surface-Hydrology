@@ -78,7 +78,11 @@ class siteObject(object):
 
     # 取得統計資料
     def status(self):
-        SQLString = 'select ReceiveDate, count(*) count, min(TIMESTAMP) min, max(TIMESTAMP) max from {} group by ReceiveDate'.format(self.tableName)
+        SQLString = 'select "all" ReceiveDate, count(*) count, min(TIMESTAMP) min, max(TIMESTAMP) max from {} \
+            UNION \
+            select ReceiveDate, count(*) count, min(TIMESTAMP) min, max(TIMESTAMP) max from {} group by ReceiveDate'\
+            .format(self.tableName, self.tableName)
+        
         with connection.cursor() as cursor:
             try:
                 cursor.execute(SQLString)
@@ -93,6 +97,14 @@ class siteObject(object):
                 # print(sys.exc_info()[0])
                 return False
         return results
+
+    # 取得站基本資料(名稱、欄位、資料數量統計)
+    def Basic(self):
+        return {
+            "name": self.__class__.__name__,
+            "field": self.field[1:-1],
+            "status": self.status()
+        }
 
     # 取得時序資料
     def timeSeries(self, startTime, endTime):
