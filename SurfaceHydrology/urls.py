@@ -21,10 +21,13 @@ from home import views as home_views
 from uploadFile import urls as uploadFile_urls
 from getData import urls as getData_urls
 
+from django.views.generic import TemplateView
+
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url(r'^$', home_views.home_page, name='home'),
     # url(r'^upload$', upload_views.home_page, name='upload'),
     url(r'^upload/', include(uploadFile_urls)),
     url(r'^data/', include(getData_urls)),
+    url(r'^vue', TemplateView.as_view(template_name="index.html")),
 ]
