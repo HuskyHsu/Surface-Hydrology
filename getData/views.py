@@ -21,7 +21,12 @@ def siteBasic(request, capa):
             })
 
 
-def tem(request, *date):
-        return JsonResponse({
-            'date': date,
-        })
+def timeSeries(request, *date):
+
+    startTime = '{}-{}-{}'.format(date[1], date[3], date[4])
+    endTime = '{}-{}-{}'.format(date[5], date[7], date[8])
+    return JsonResponse({
+        'startTime': startTime,
+        'endTime': endTime,
+        'check': startTime <= endTime
+    })
