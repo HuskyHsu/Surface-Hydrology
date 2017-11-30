@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block body %}
-<div class="tile is-ancestor">
+<div class="tile is-ancestor" id="app">
     <div class="tile is-4 is-vertical is-parent">
         <div class="tile is-child box">
             <p class="title">選取</p>
@@ -9,7 +9,7 @@
                 <label class="label">測站</label>
                 <div class="control">
                     <div class="select">
-                        <select>
+                        <select v-model="site">
                             {% for site in siteBasic %}
                             <option value="{{site.name}}">{{site.name}}</option>
                             {% endfor %}
@@ -22,7 +22,7 @@
                 <label class="label">起始時間</label>
                 <div class="control">
                     <div class="select">
-                        <input class="input is-primary" type="datetime-local" value="2017-11-01T08:00">
+                        <input v-model="startTime" class="input is-primary" type="datetime-local">
                     </div>
                 </div>
             </div>
@@ -30,20 +30,16 @@
                 <label class="label">結束時間</label>
                 <div class="control">
                     <div class="select">
-                        <input class="input is-primary" type="datetime-local" value="2017-11-01T08:00">
+                        <input v-model="endTime" class="input is-primary" type="datetime-local">
                     </div>
                 </div>
             </div>
 
-            {% for site in siteBasic %}
             <div class="select">
-                <select>
-                    {% for field in site.field %}
-                    <option value="{{field}}">{{field}}</option>
-                    {% endfor %}
+                <select v-model="item">
+                    <option v-for="(item, index) in siteField">[[item]]</option>
                 </select>
             </div>
-            {% endfor %}
 
         </div>
     </div>
@@ -54,4 +50,8 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block Script %}
+    <script src="static/js/viewData.js"></script>
 {% endblock %}
