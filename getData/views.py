@@ -9,7 +9,6 @@ def siteBasic(request, capa):
     if capa != 'all':
         return JsonResponse({
             'success': LHC.Site().create(capa).Basic(),
-            # 'data': site.timeSeries('2015-07-30', '2015-08-17'),
             })
     else:
         sites = ["Capa2", "Capa3", "Capa4"]
@@ -17,7 +16,6 @@ def siteBasic(request, capa):
 
         return JsonResponse({
             'success': siteBasic,
-            # 'data': site.timeSeries('2015-07-30', '2015-08-17'),
             })
 
 

@@ -4,9 +4,10 @@ var app = new Vue({
     data: {
         site: 'Capa2',
         item: '',
-        startTime: '2017-11-01T10:00',
-        endTime: '2017-11-10T08:00',
+        startTime: '2017-11-01',
+        endTime: '2017-11-10',
         siteBasic: [],
+        timeSeries: []
     },
     computed: {
         siteField: function () {
@@ -18,6 +19,27 @@ var app = new Vue({
             })
             this.item = field.length > 0 ? field[0][0] : ''
             return field.length > 0 ? field[0] : ''
+        },
+        gettimeSeries: function () {
+            var site = this.site;
+            var item = this.item;
+            var startTime = this.startTime;
+            var endTime = this.endTime;
+
+            var vm = this;
+
+            if (item != '') {
+                axios.get(`/data/${site}/${item}/${startTime}/${endTime}`)
+                    .then(function (response) {
+                        if (response.data.check) {
+                            // console.log(response);
+                            vm.timeSeries = response.data.data;
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
         }
     }
 })

@@ -21,24 +21,25 @@
             <div class="field">
                 <label class="label">起始時間</label>
                 <div class="control">
-                    <div class="select">
-                        <input v-model="startTime" class="input is-primary" type="datetime-local">
-                    </div>
+                        <input v-model="startTime" class="input is-primary" type="date">
                 </div>
             </div>
             <div class="field">
                 <label class="label">結束時間</label>
                 <div class="control">
-                    <div class="select">
-                        <input v-model="endTime" class="input is-primary" type="datetime-local">
-                    </div>
+                        <input v-model="endTime" class="input is-primary" type="date">
                 </div>
             </div>
 
-            <div class="select">
-                <select v-model="item">
-                    <option v-for="(item, index) in siteField">[[item]]</option>
-                </select>
+            <div class="field">
+                <label class="label">項目</label>
+                <div class="control">
+                    <div class="select">
+                        <select v-model="item">
+                            <option v-for="(item, index) in siteField">[[item]]</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -46,6 +47,7 @@
     <div class="tile is-parent">
         <div class="tile is-child box">
             <p class="title">時序資料</p>
+            [[gettimeSeries]]
         </div>
     </div>
 </div>
