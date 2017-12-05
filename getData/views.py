@@ -21,12 +21,18 @@ def siteBasic(request, capa):
             })
 
 
-def timeSeries(request, *date):
+def timeSeries(request, *parameter):
 
-    startTime = '{}-{}-{}'.format(date[1], date[3], date[4])
-    endTime = '{}-{}-{}'.format(date[5], date[7], date[8])
+    site = LHC.Site().create(parameter[0])
+    item = parameter[1]
+    startTime = '{}-{}-{}'.format(parameter[2], parameter[4], parameter[5])
+    endTime = '{}-{}-{}'.format(parameter[6], parameter[8], parameter[9])
+    check = startTime <= endTime
+
     return JsonResponse({
+        'site': parameter[0],
         'startTime': startTime,
         'endTime': endTime,
-        'check': startTime <= endTime
+        'check': check,
+        'data': site.timeSeries(item, startTime, endTime) if check else [],
     })
