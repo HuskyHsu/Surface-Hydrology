@@ -47,6 +47,9 @@
     <div class="tile is-parent">
         <div class="tile is-child box">
             <p class="title">時序資料</p>
+            <svg width="960" height="500">
+                <g></g>
+            </svg>
             [[gettimeSeries]]
         </div>
     </div>
@@ -55,5 +58,6 @@
 {% endblock %}
 
 {% block Script %}
+    <script src="static/d3.v4.min.js"></script>
     <script src="static/js/viewData.js"></script>
 {% endblock %}
