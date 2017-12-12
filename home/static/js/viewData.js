@@ -1,13 +1,17 @@
 var app = new Vue({
     el: '#app',
     delimiters: ['[[', ']]'],
+    created: function () {
+        // `this` points to the vm instance
+        this.ajaxData();
+    },
     data: {
         site: 'Capa2',
         item: '',
         startTime: '2015-04-01',
         endTime: '2015-06-10',
         siteBasic: [],
-        timeSeries: []
+        timeSeries: ""
     },
     computed: {
         siteField: function () {
@@ -20,86 +24,116 @@ var app = new Vue({
             this.item = field.length > 0 ? field[0][0] : ''
             return field.length > 0 ? field[0] : ''
         },
-        gettimeSeries: function () {
-            var site = this.site;
-            var item = this.item;
-            var startTime = this.startTime;
-            var endTime = this.endTime;
+        // gettimeSeries: function () {
+        //     var site = this.site;
+        //     var item = this.item;
+        //     var startTime = this.startTime;
+        //     var endTime = this.endTime;
+        //     var plotLine = this.plotLine;
 
-            var vm = this;
+        //     var vm = this;
 
-            if (item != '') {
-                axios.get(`/data/${site}/${item}/${startTime}/${endTime}`)
+        //     if (item != '') {
+        //         axios.get(`/data/${site}/${item}/${startTime}/${endTime}`)
+        //             .then(function (response) {
+        //                 if (response.data.check) {
+        //                     plotLine(item, response.data.data)
+        //                 }
+        //             })
+        //             .catch(function (error) {
+        //                 console.log(error);
+        //             });
+        //     }
+        // }
+    },
+    methods: {
+        plotLine: function (item, data) {
+
+            var margin = {top: 20, right: 20, bottom: 30, left: 50};
+            var width = 960 - margin.left - margin.right;
+            var height = 500 - margin.top - margin.bottom;
+
+            var svg = d3.select("svg")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom);
+
+            svg.selectAll("g").remove();
+            var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S");
+            // 2015-05-10T05:30:00
+            var x = d3.scaleTime()
+                .rangeRound([0, width]);
+
+            var y = d3.scaleLinear()
+                .rangeRound([height, 0]);
+
+            var line = d3.line()
+                .x(function (d) {
+                    return x(parseTime(d.TIMESTAMP));
+                })
+                .y(function (d) {
+                    return y(d[item]);
+                });
+
+            x.domain(d3.extent(data, function (d) {
+                return parseTime(d.TIMESTAMP);
+            }));
+            y.domain(d3.extent(data, function (d) {
+                return d[item];
+            }));
+
+            g.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            g.append("g")
+                .call(d3.axisLeft(y))
+                .append("text")
+                .attr("fill", "#000")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", "0.71em")
+                .attr("text-anchor", "end")
+                .text(item);
+
+            g.append("path")
+                .datum(data)
+                .attr("fill", "none")
+                .attr("stroke", "steelblue")
+                .attr("stroke-linejoin", "round")
+                .attr("stroke-linecap", "round")
+                .attr("stroke-width", 1.5)
+                .attr("d", line);
+
+        },
+        ajaxData: _.debounce(
+                function () {
+
+                  var vm = this;
+                  axios.get(`/data/${vm.site}/${vm.item}/${vm.startTime}/${vm.endTime}`)
                     .then(function (response) {
-                        if (response.data.check) {
-                            // console.log(response);
-                            // vm.timeSeries = response.data.data;
-                            var data = response.data.data;
-
-                            var svg = d3.select("svg");
-                            var margin = { top: 20, right: 20, bottom: 30, left: 50 };
-                            var width = +svg.attr("width") - margin.left - margin.right;
-                            var height = +svg.attr("height") - margin.top - margin.bottom;
-                            svg.selectAll("g").remove();
-                            var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-                            var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S");
-                            // 2015-05-10T05:30:00
-                            var x = d3.scaleTime()
-                                .rangeRound([0, width]);
-
-                            var y = d3.scaleLinear()
-                                .rangeRound([height, 0]);
-
-                            var line = d3.line()
-                                .x(function (d) {
-                                    return x(parseTime(d.TIMESTAMP));
-                                })
-                                .y(function (d) {
-                                    return y(d[item]);
-                                });
-
-                            x.domain(d3.extent(data, function (d) {
-                                return parseTime(d.TIMESTAMP);
-                            }));
-                            y.domain(d3.extent(data, function (d) {
-                                return d[item];
-                            }));
-
-                            g.append("g")
-                                .attr("transform", "translate(0," + height + ")")
-                                .call(d3.axisBottom(x))
-                                .select(".domain")
-                                .remove();
-
-                            g.append("g")
-                                .call(d3.axisLeft(y))
-                                .append("text")
-                                .attr("fill", "#000")
-                                .attr("transform", "rotate(-90)")
-                                .attr("y", 6)
-                                .attr("dy", "0.71em")
-                                .attr("text-anchor", "end")
-                                .text(item);
-
-                            g.append("path")
-                                .datum(data)
-                                .attr("fill", "none")
-                                .attr("stroke", "steelblue")
-                                .attr("stroke-linejoin", "round")
-                                .attr("stroke-linecap", "round")
-                                .attr("stroke-width", 1.5)
-                                .attr("d", line);
-
-
-
-
-                        }
+                      vm.timeSeries = response.data.data;
                     })
                     .catch(function (error) {
-                        console.log(error);
-                    });
-            }
+                      vm.timeSeries = []
+                    })
+                },
+                500
+              )
+    },
+    watch: {
+        startTime: function(){
+            this.ajaxData()
+        },
+        endTime: function(){
+            this.ajaxData()
+        },
+        item: function(){
+            this.ajaxData()
+        },
+        timeSeries: function(){
+            this.plotLine(this.item, this.timeSeries)
         }
     }
 })
@@ -107,8 +141,8 @@ var app = new Vue({
 axios.get('/data/all/')
     .then(function (response) {
         // app.siteBasic = response.data.success;
-        app.siteBasic = response.data.success
-        // console.log(response.data);
+        app.siteBasic = response.data.success;
+
     })
     .catch(function (error) {
         console.log(error);
