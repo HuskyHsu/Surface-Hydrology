@@ -2,8 +2,15 @@ var app = new Vue({
     el: '#app',
     delimiters: ['[[', ']]'],
     created: function () {
-        // `this` points to the vm instance
-        this.ajaxData();
+        var vm = this;
+        axios.get('/data/all/')
+            .then(function (response) {
+                app.siteBasic = response.data.success;
+                vm.ajaxData_();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     },
     data: {
         site: 'Capa2',
@@ -24,38 +31,22 @@ var app = new Vue({
             this.item = field.length > 0 ? field[0][0] : ''
             return field.length > 0 ? field[0] : ''
         },
-        // gettimeSeries: function () {
-        //     var site = this.site;
-        //     var item = this.item;
-        //     var startTime = this.startTime;
-        //     var endTime = this.endTime;
-        //     var plotLine = this.plotLine;
-
-        //     var vm = this;
-
-        //     if (item != '') {
-        //         axios.get(`/data/${site}/${item}/${startTime}/${endTime}`)
-        //             .then(function (response) {
-        //                 if (response.data.check) {
-        //                     plotLine(item, response.data.data)
-        //                 }
-        //             })
-        //             .catch(function (error) {
-        //                 console.log(error);
-        //             });
-        //     }
-        // }
     },
     methods: {
         plotLine: function (item, data) {
 
-            var margin = {top: 20, right: 20, bottom: 30, left: 50};
+            var margin = {
+                top: 20,
+                right: 20,
+                bottom: 30,
+                left: 50
+            };
             var width = 960 - margin.left - margin.right;
             var height = 500 - margin.top - margin.bottom;
 
             var svg = d3.select("svg")
-                        .attr("width", width + margin.left + margin.right)
-                        .attr("height", height + margin.top + margin.bottom);
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom);
 
             svg.selectAll("g").remove();
             var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -108,42 +99,42 @@ var app = new Vue({
 
         },
         ajaxData: _.debounce(
-                function () {
+            function () {
 
-                  var vm = this;
-                  axios.get(`/data/${vm.site}/${vm.item}/${vm.startTime}/${vm.endTime}`)
+                var vm = this;
+                axios.get(`/data/${vm.site}/${vm.item}/${vm.startTime}/${vm.endTime}`)
                     .then(function (response) {
-                      vm.timeSeries = response.data.data;
+                        vm.timeSeries = response.data.data;
                     })
                     .catch(function (error) {
-                      vm.timeSeries = []
+                        vm.timeSeries = []
                     })
-                },
-                500
-              )
+            },
+            500
+        ),
+        ajaxData_: function () {
+            var vm = this;
+            axios.get(`/data/${vm.site}/${vm.item}/${vm.startTime}/${vm.endTime}`)
+                .then(function (response) {
+                    vm.timeSeries = response.data.data;
+                })
+                .catch(function (error) {
+                    vm.timeSeries = []
+                })
+        }
     },
     watch: {
-        startTime: function(){
+        startTime: function () {
             this.ajaxData()
         },
-        endTime: function(){
+        endTime: function () {
             this.ajaxData()
         },
-        item: function(){
-            this.ajaxData()
+        item: function () {
+            this.ajaxData_()
         },
-        timeSeries: function(){
+        timeSeries: function () {
             this.plotLine(this.item, this.timeSeries)
         }
     }
 })
-
-axios.get('/data/all/')
-    .then(function (response) {
-        // app.siteBasic = response.data.success;
-        app.siteBasic = response.data.success;
-
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
