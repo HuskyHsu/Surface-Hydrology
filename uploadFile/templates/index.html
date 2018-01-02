@@ -1,15 +1,45 @@
 {% extends "..\..\home\templates\base.html" %}
 
+{% block title %}
+上傳資料
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="/static/css/uploadFile.css">
+{% endblock %}
+
+
 {% block body %}
+
+<div class="container">
+    <h1>蓮華池資料上傳</h1>
+    <p>上傳原始收回檔案</p>
+
+    <form method="post" action="/upload/file" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>收檔日期</label>
+            <input type="date" class="form-control" value="2017-01-01" name="date">
+        </div>
+        {% for site in field %}
+        <div class="form-group">
+            <label>{{ site.name }}</label>
+            <input type="file" class="form-control-file" name="{{ site.name }}">
+            <small id="emailHelp" class="form-text text-muted">請選擇[{{ site.fileName }}]檔案</small>
+        </div>
+        {% endfor %}
+        <div class="form-group">
+            
+            <label>備註</label>
+            <textarea class="form-control" rows="2" placeholder="...暫無儲存備註"></textarea>
+        </div>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">上傳</button>
+    </form>
+
+</div>
+<!-- 
 <section class="section columns is-mobile is-centered">
     <div class="container column is-half is-narrow">
-        <h1 class="title">
-            蓮華池資料上傳
-        </h1>
-        <p class="subtitle">
-            上傳原始收回檔案
-        </p>
-
         <form method="post" action="/upload/file" enctype="multipart/form-data">
 
             <div class="field">
@@ -46,7 +76,7 @@
             <div class="field">
                 <label class="label">備註</label>
                 <div class="control">
-                    <textarea class="textarea" placeholder="...暫無儲存備註與收檔日期"></textarea>
+                    
                 </div>
             </div>
 
@@ -59,5 +89,5 @@
             {% csrf_token %}
         </form>
     </div>
-</section>
+</section> -->
 {% endblock %}

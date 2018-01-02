@@ -1,51 +1,50 @@
 <!DOCTYPE html>
 <html>
-<title>Home Page</title>
+<title>{% block title %}{% endblock %}</title>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- <link rel="stylesheet" href="/static/bulma/css/bulma.css"> -->
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
-    <!-- <link rel="stylesheet" href="/static/base.css"> -->
+  <!-- <link rel="stylesheet" href="/static/bulma/css/bulma.css"> -->
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="/static/base.css"> -->
 
-    {% block style %}
-    {% endblock %}
-
-
+  {% block style %}
+  {% endblock %}
 
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark header">
-        <a class="navbar-brand" href="http://hydro.ihs.ncu.edu.tw/">Surface Hydrology Lab.</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="..">資料綜覽</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link disabled" href="../upload">上傳檔案</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark header">
+    <a class="navbar-brand" href="http://hydro.ihs.ncu.edu.tw/">Surface Hydrology Lab.</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    {% block body %}
-    {% endblock %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="..">資料綜覽</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link disabled" href="../upload">上傳檔案</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-    <script src="/static/axios.min.js"></script>
-    <script src="static/vue.js"></script>
+  {% block body %}
+  {% endblock %}
 
-    {% block Script %}
-    {% endblock %}
+  <script src="/static/axios.min.js"></script>
+  <script src="/static/vue.js"></script>
+
+  {% block Script %}
+  {% endblock %}
 
 </body>
 
