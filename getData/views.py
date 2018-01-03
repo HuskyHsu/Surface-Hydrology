@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 
 from uploadFile.process import LHC
+import csv
 
-# Create your views here.
+# 取得站資訊
 def siteBasic(request, capa):
 
     if capa != 'all':
@@ -18,7 +19,7 @@ def siteBasic(request, capa):
             'success': siteBasic,
             })
 
-
+# 取得時序資料
 def timeSeries(request, *parameter):
 
     site = LHC.Site().create(parameter[0])
@@ -34,3 +35,18 @@ def timeSeries(request, *parameter):
         'check': check,
         'data': site.timeSeries(item, startTime, endTime) if check else [],
     })
+
+def some_view(request):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
+
+    writer = csv.writer(response)
+
+    site = LHC.Site().create('Capa2')
+    data = site.outputData('2015-07-01', '2015-07-10', ['T0', 'T10'])
+
+    for row in data:
+        writer.writerow(row)
+
+    return response

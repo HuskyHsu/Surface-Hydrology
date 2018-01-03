@@ -125,6 +125,25 @@ class siteObject(object):
                 return False
         return results
 
+    def outputData(self, startTime, endTime, items):
+        SQLString = 'select TIMESTAMP, {} from {} where TIMESTAMP BETWEEN %s and %s'.format(','.join(items), self.tableName)
+        with connection.cursor() as cursor:
+            try:
+                cursor.execute(SQLString, [startTime, endTime])
+
+                columns = [column[0] for column in cursor.description]
+                results = [row for row in cursor.fetchall()]
+
+                # print(columns + results)
+                # print(results)
+
+            except:
+                cursor.close()
+                # print(sys.exc_info()[0])
+                return False
+        return [columns] + results
+
+
 class Capa2(siteObject):
     tableName = 'RAWDATA_Capa2'
     field = ['TIMESTAMP', 'T0', 'T10', 'T30', 'T50', 'T150', 'SF10', 'SF30', 'SF50', 'SF70', 'SF90', 'ReceiveDate']
