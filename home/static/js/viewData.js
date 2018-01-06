@@ -18,7 +18,8 @@ var app = new Vue({
         startTime: '2015-04-01',
         endTime: '2015-06-10',
         siteBasic: [],
-        timeSeries: ""
+        timeSeries: "",
+        checkedItems: []
     },
     computed: {
         siteField: function () {
@@ -135,6 +136,9 @@ var app = new Vue({
         },
         timeSeries: function () {
             this.plotLine(this.item, this.timeSeries)
+        },
+        site: function () {
+            this.checkedItems = []
         }
     }
 })

@@ -45,6 +45,10 @@ html, body {
 }
 
 
+.form-check {
+    padding-left: 1.25rem;
+}
+
 /*
    * Dashboard
    */

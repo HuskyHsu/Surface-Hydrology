@@ -36,15 +36,19 @@ def timeSeries(request, *parameter):
         'data': site.timeSeries(item, startTime, endTime) if check else [],
     })
 
-def some_view(request):
+def outputData(request, *parameter):
     # Create the HttpResponse object with the appropriate CSV header.
+    site = LHC.Site().create(parameter[0])
+    items = parameter[1].split(',')
+    startTime = '{}-{}-{}'.format(parameter[2], parameter[4], parameter[5])
+    endTime = '{}-{}-{}'.format(parameter[6], parameter[8], parameter[9])
+    data = site.outputData(startTime, endTime, items)
+    
+    filename = "{}-{}-{}-{}.csv".format(parameter[0], ','.join(items), startTime.replace("-", ""), endTime.replace("-", ""))
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
+    response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
 
     writer = csv.writer(response)
-
-    site = LHC.Site().create('Capa2')
-    data = site.outputData('2015-07-01', '2015-07-10', ['T0', 'T10'])
 
     for row in data:
         writer.writerow(row)

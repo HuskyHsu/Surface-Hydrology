@@ -125,6 +125,7 @@ class siteObject(object):
                 return False
         return results
 
+    # 取得資料陣列
     def outputData(self, startTime, endTime, items):
         SQLString = 'select TIMESTAMP, {} from {} where TIMESTAMP BETWEEN %s and %s'.format(','.join(items), self.tableName)
         with connection.cursor() as cursor:
@@ -133,9 +134,6 @@ class siteObject(object):
 
                 columns = [column[0] for column in cursor.description]
                 results = [row for row in cursor.fetchall()]
-
-                # print(columns + results)
-                # print(results)
 
             except:
                 cursor.close()
