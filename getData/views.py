@@ -36,6 +36,7 @@ def timeSeries(request, *parameter):
         'data': site.timeSeries(item, startTime, endTime) if check else [],
     })
 
+# 取得下載資料(CSV)
 def outputData(request, *parameter):
     # Create the HttpResponse object with the appropriate CSV header.
     site = LHC.Site().create(parameter[0])

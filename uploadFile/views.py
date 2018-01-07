@@ -10,7 +10,7 @@ import time
 
 now = lambda: time.time()
 
-# Create your views here.
+# 上傳畫面
 def index(request):
     field = [
         {
@@ -27,8 +27,9 @@ def index(request):
         },
     ]
 
-    return render(request, 'index.html', {"field": field})
+    return render(request, 'uploadFile.html', {"field": field})
 
+# POST位置
 def post_file(request):
     # POST and have file
     if request.method == 'POST' and request.FILES != {}:
