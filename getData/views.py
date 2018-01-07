@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 
-from uploadFile.process import LHC
+from process import LHC
 import csv
 
 # 取得站資訊

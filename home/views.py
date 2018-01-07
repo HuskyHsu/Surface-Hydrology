@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from uploadFile.process import LHC
+from process import LHC
 
 # Create your views here.
 def home_page(request):
