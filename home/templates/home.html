@@ -44,16 +44,34 @@
                         <label class="form-check-label" v-bind:for="[[item]]">[[item]]</label>
                     </div>
                 </div>
-                <a class="btn btn-primary" v-bind:href="[['./data/output/' + site + '/' + checkedItems + '/' + startTime + '/' + endTime]]" role="button">下載</a>
+                <a class="btn btn-primary" v-bind:href="[['./data/' + site + '/output/' + checkedItems + '/' + startTime + '/' + endTime + '/']]" role="button">下載</a>
             </form>
         </nav>
 
         <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
 
-            <h2>時序資料</h2>
-            <svg>
-                <g></g>
-            </svg>
+            <!-- <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">時序資料</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">資料綜覽</a>
+                </li>
+            </ul> -->
+
+            <div class="pinned">
+                <h2>時序資料</h2>
+                <svg id="timeSeries">
+                </svg>
+            </div>
+
+            <div class="pinned">
+                <h2>資料綜覽</h2>
+                <div id="calendar-graph">
+
+                </div>
+            </div>
+
         </main>
     </div>
 </div>

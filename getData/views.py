@@ -19,6 +19,15 @@ def siteBasic(request, capa):
             'success': siteBasic,
             })
 
+# 取得資料狀態
+def calendarGraph(request, capa, item):
+    site = LHC.Site().create(capa)
+
+    return JsonResponse({
+        'success': site.calendarGraph(item),
+        })
+
+
 # 取得時序資料
 def timeSeries(request, *parameter):
 

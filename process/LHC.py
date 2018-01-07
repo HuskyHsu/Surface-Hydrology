@@ -106,6 +106,24 @@ class siteObject(object):
             "status": self.status()
         }
 
+    def calendarGraph(self, item):
+        SQLString = 'select DATE_FORMAT(TIMESTAMP, "%Y-%m-%d") as date, count({}) as num from {} group by date order by date;'.format(item, self.tableName)
+        with connection.cursor() as cursor:
+            try:
+                cursor.execute(SQLString)
+
+                columns = [column[0] for column in cursor.description]
+                results = []
+                for row in cursor.fetchall():
+                    r = [row[0], None if row[1] == None else float(row[1])]
+                    results.append(dict(zip(columns, r)))
+
+            except:
+                cursor.close()
+                # print(sys.exc_info()[0])
+                return False
+        return results
+
     # 取得時序資料
     def timeSeries(self, item, startTime, endTime):
         SQLString = 'select TIMESTAMP, {} from {} where TIMESTAMP BETWEEN %s and %s'.format(item, self.tableName)

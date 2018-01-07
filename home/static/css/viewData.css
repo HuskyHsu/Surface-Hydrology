@@ -4,6 +4,16 @@ html, body {
     padding: 0;
 }
 
+main {
+    position: fixed;
+    top: 56px;
+}
+
+.pinned {
+    /* border: 1px #e1e4e8 solid; */
+    padding: 12px;
+}
+
 .header {
     position: fixed;
     top: 0;
@@ -11,9 +21,6 @@ html, body {
     left: 0;
     z-index: 1030;
 }
-/*
-   * Sidebar
-   */
 
 .sidebar {
     position: fixed;
@@ -48,6 +55,8 @@ html, body {
 .form-check {
     padding-left: 1.25rem;
 }
+
+
 
 /*
    * Dashboard
