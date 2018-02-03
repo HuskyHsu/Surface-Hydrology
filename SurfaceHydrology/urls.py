@@ -25,7 +25,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
-    url(r'^$', home_views.home_page, name='home'),
+    url(r'^view/', home_views.home_page, name='home'),
     # url(r'^upload$', upload_views.home_page, name='upload'),
     url(r'^upload/', include(uploadFile_urls)),
     url(r'^data/', include(getData_urls)),
