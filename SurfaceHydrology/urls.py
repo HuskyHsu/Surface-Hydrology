@@ -17,15 +17,19 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 from home import views as home_views
+from person import urls as person_urls
 # from uploadFlie import views as upload_views
 from uploadFile import urls as uploadFile_urls
 from getData import urls as getData_urls
+from data import urls as data_urls
 
 from django.views.generic import TemplateView
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
-    url(r'^view/', home_views.home_page, name='home'),
+    url(r'^$', home_views.home_page, name='home'),
+    url(r'^person/', include(person_urls)),
+    url(r'^_data/', include(data_urls)),
     # url(r'^upload$', upload_views.home_page, name='upload'),
     url(r'^upload/', include(uploadFile_urls)),
     url(r'^data/', include(getData_urls)),

@@ -1,83 +1,72 @@
 {% extends "base.html" %}
 
 {% block title %}
-檢視資料
+地表水文實驗室
 {% endblock %}
 
 {% block style %}
-<link rel="stylesheet" href="/static/css/viewData.css">
+
+{% endblock %}
+
+{% block container %}
+<div class="jumbotron p-3 p-md-5 rounded cover">
+    <div class="row sub-cover text-white">
+        <div class="col-md-10 px-0">
+            <h1 class="display-4">研究室 簡介</h1>
+            <p class="lead my-3">
+                陸地水文的研究主體為地表水與地下水兩大系統，由於兩系統內的水文循環具有複雜的交互作用，包含許多物理、化學以及生物過程，且研究時所要面對的空間、時間尺度也不盡相同。本研究室希望透過結合已知的物理、化學基礎，以及已了解的水文、地質和生物特性等來發展能適用的模擬工具，並搭配現地的實驗與觀測資料來進行模式檢定驗證與改良。
+            </p>
+            <!-- <p class="lead mb-0">
+            <a href="#" class="text-white font-weight-bold">Continue reading...</a>
+        </p> -->
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid" id="app">
+<footer class="container py-5">
     <div class="row">
-        <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
-            <form>
-                <div class="form-group">
-                    <label>測站</label>
-                    <br>
-                    <select class="custom-select" v-model="site">
-                        {% for site in siteBasic %}
-                        <option value="{{site.name}}">{{site.name}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>起始時間</label>
-                    <input v-model="startTime" class="form-control" type="date">
-                </div>
-                <div class="form-group">
-                    <label>結束時間</label>
-                    <input v-model="endTime" class="form-control" type="date">
-                </div>
-                <div class="form-group">
-                    <label>測站</label>
-                    <br>
-                    <select class="custom-select" v-model="item">
-                        <option v-for="(item, index) in siteField">[[item]]</option>
-                    </select>
-                </div>
-                <label>下載項目</label>
-                <div class="form-check">
-                    <div v-for="(item, index) in siteField">
-                        <input type="checkbox" class="form-check-input" v-bind:value="[[item]]" v-bind:id="[[item]]" v-model="checkedItems">
-                        <label class="form-check-label" v-bind:for="[[item]]">[[item]]</label>
-                    </div>
-                </div>
-                <a class="btn btn-primary" v-bind:href="[['./data/' + site + '/output/' + checkedItems + '/' + startTime + '/' + endTime + '/']]" role="button">下載</a>
-            </form>
-        </nav>
 
-        <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-
-            <!-- <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">時序資料</a>
+        <div class="col-6 col-md">
+            <h5>National Central University</h5>
+            <ul class="list-unstyled text-small">
+                <li>
+                    <a class="text-muted" href="#">Graduate Institute of Hydrological & Oceanic Sciences </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">資料綜覽</a>
+                <li>
+                    <a class="text-muted" href="#">No.300, Chung-Da Rd.,</a>
                 </li>
-            </ul> -->
+                <li>
+                    <a class="text-muted" href="#">Chung-Li City,</a>
+                </li>
+                <li>
+                    <a class="text-muted" href="#">Taiwan</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+                <h5>聯絡方式</h5>
+                <ul class="list-unstyled text-small">
+                    <li>
+                        <a class="text-muted" href="#">+886-34227151 分機:65695</a>
+                    </li>
+                    <li>
+                        <a class="text-muted" href="#">國立中央大學 水文所</a>
+                    </li>
+                    <li>
+                        <a class="text-muted" href="#">科一館 S321教室</a>
+                    </li>
+                    <li>
+                        <a class="text-muted" href="#">320 桃園縣中壢市中大路300號</a>
+                    </li>
+                </ul>
+        </div>
 
-            <div class="pinned">
-                <h2>時序資料</h2>
-                <svg id="timeSeries">
-                </svg>
-            </div>
-
-            <div class="pinned">
-                <h2>資料綜覽</h2>
-                <div id="calendar-graph">
-
-                </div>
-            </div>
-
-        </main>
     </div>
-</div>
+</footer>
+{% endblock %}
 
-{% endblock %} {% block Script %}
-<script src="/static/d3.v4.min.js"></script>
-<script src="/static/lodash.min.js"></script>
-<script src="/static/js/viewData.js"></script>
+{% block Script %}
+
 {% endblock %}

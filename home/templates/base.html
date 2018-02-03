@@ -9,63 +9,60 @@
   <!-- <link rel="stylesheet" href="/static/bulma/css/bulma.css"> -->
   <link rel="stylesheet" href="/static/css/bootstrap.min.css">
   <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
-  <!-- <link rel="stylesheet" href="/static/base.css"> -->
+  <link rel="stylesheet" href="/static/css/base.css">
 
-  {% block style %}
-  {% endblock %}
+  {% block style %} {% endblock %}
 
 </head>
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark header">
-    <a class="navbar-brand" href="http://hydro.ihs.ncu.edu.tw/">Surface Hydrology Lab.</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <div class="container">
+    <header class="blog-header py-3">
+      <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="col-3 pt-1">
+          <!-- <a class="text-muted" href="#">Subscribe</a> -->
+        </div>
+        <div class="col-6 text-center">
+          <a class="blog-header-logo text-dark" href="#">地表水文實驗室</a>
+        </div>
+        <div class="col-3 d-flex justify-content-end align-items-center">
+          <!-- <a class="text-muted" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" class="mx-3">
+              <circle cx="10.5" cy="10.5" r="7.5"></circle>
+              <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
+            </svg>
+          </a> -->
+          <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+        </div>
+      </div>
+    </header>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="..">時序資料展示</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link disabled" href="../upload">上傳檔案</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link disabled" href="#">指導教授</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link disabled" href="#">實驗室成員</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link disabled" href="#">研究計畫</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link disabled" href="#">研究成果</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link disabled" href="#">研究資料</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link disabled" href="#">教授課程</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link disabled" href="#">後臺管理</a>
-        </li>
-      </ul>
+    <div class="nav-scroller py-1 mb-2">
+      <nav class="nav d-flex justify-content-between">
+        <a class="p-2 text-muted" href="/person/professor">指導教授</a>
+        <a class="p-2 text-muted" href="#">實驗室成員</a>
+        <a class="p-2 text-muted" href="#">研究計畫</a>
+        <a class="p-2 text-muted" href="#">研究成果</a>
+        <a class="p-2 text-muted" href="#">研究資料</a>
+        <a class="p-2 text-muted" href="#">研究測站</a>
+        <a class="p-2 text-muted" href="#">實驗儀器</a>
+        <a class="p-2 text-muted" href="#">教授課程</a>
+      </nav>
     </div>
-  </nav>
 
-  {% block body %}
-  {% endblock %}
+    {% block container %} {% endblock %}
 
-  <script src="/static/axios.min.js"></script>
-  <script src="/static/vue.js"></script>
+  </div>
 
-  {% block Script %}
-  {% endblock %}
+
+  {% block body %} {% endblock %}
+
+  <!-- <script src="/static/axios.min.js"></script>
+  <script src="/static/vue.js"></script> -->
+
+  {% block Script %} {% endblock %}
 
 </body>
 
