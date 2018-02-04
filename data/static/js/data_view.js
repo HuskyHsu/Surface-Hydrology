@@ -45,7 +45,7 @@ var app = new Vue({
                 bottom: 30,
                 left: 50
             };
-            var width = 960 - margin.left - margin.right;
+            var width = d3.select("#timeSeries").node().parentNode.offsetWidth - margin.left - margin.right;
             var height = 500 - margin.top - margin.bottom;
 
             var svg = d3.select("#timeSeries")

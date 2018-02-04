@@ -1,0 +1,86 @@
+{% extends "..\..\home\templates\base.html" %}
+
+{% block title %}
+研究成員
+{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block container %}
+<div class="blog-post">
+    <h3>研究生</h3>
+    <hr>
+    <div class="row mb-2">
+        {% for item in masters %}
+        <div class="col-md-3" style="margin-bottom: 2em;">
+            <div class="card mb-6 box-shadow">
+                <img class="card-img-top" src="/static/img/members/{{ item.name }}.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ item.type }}</h6>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="blog-post">
+    <h3>研究助理</h3>
+    <hr>
+    <div class="row mb-2">
+        {% for item in assistants %}
+        <div class="col-md-3" style="margin-bottom: 2em;">
+            <div class="card mb-6 box-shadow">
+                <img class="card-img-top" src="/static/img/members/{{ item.name }}.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ item.type }}</h6>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="blog-post">
+        <h3>歷屆畢業生</h3>
+        <hr>
+        <div class="row mb-2">
+            {% for item in graduates %}
+            <div class="col-md-3" style="margin-bottom: 2em;">
+                <div class="card mb-6 box-shadow">
+                    <img class="card-img-top" src="/static/img/members/{{ item.name }}.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ item.doctor_graduation_year|default_if_none:item.master_graduation_year }}畢</h6>
+                        
+                        {% if item.master_graduation_year != None %}
+                            <h5 class="card-subtitle mb-2">碩士論文：</h5>
+                            <a href="{{item.master_disseration_url}}" target="_blank">{{ item.master_disseration_title }}</a>
+                        {% endif %}
+
+                        {% if item.doctor_graduation_year != None %}
+                            <h5 class="card-subtitle mb-2">博士論文：</h5>
+                            <a href="{{item.doctor_disseration_url}}" target="_blank">{{ item.doctor_disseration_title }}</a>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+
+<!-- /.container -->
+{% endblock %}
+
+{% block Script %}
+
+{% endblock %}
