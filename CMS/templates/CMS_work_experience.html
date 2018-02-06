@@ -1,0 +1,63 @@
+{% extends "CMS.html" %}
+
+{% block title %}
+後台-工作經歷
+{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block container %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">工作經歷修正</h1>
+    <!-- <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary">Share</button>
+            <button class="btn btn-sm btn-outline-secondary">Export</button>
+        </div>
+        <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+        </button>
+    </div> -->
+</div>
+
+<!-- <canvas class="my-4" id="myChart" width="900" height="380"></canvas> -->
+<form class="form-inline">
+
+    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="單位">
+    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="部門">
+    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="職稱">
+    <input type="text" class="form-control col-md-1 mb-2 mr-sm-2" placeholder="起始日期">
+    <input type="text" class="form-control col-md-1 mb-2 mr-sm-2" placeholder="結束日期">
+
+    <button type="submit" class="btn btn-warning mb-2 mr-sm-2">新增</button>
+
+</form>
+{% for item in work_experience %}
+<form class="form-inline">
+
+    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="單位" value="{{item.unit}}">
+    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="部門" value="{{item.department|default_if_none:""}}">
+    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="職稱" value="{{item.title}}">
+    <input type="text" class="form-control col-md-1 mb-2 mr-sm-2" placeholder="起始日期" value="{{item.start_year}}">
+    <input type="text" class="form-control col-md-1 mb-2 mr-sm-2" placeholder="結束日期" value="{{item.end_year|default_if_none:"迄今"}}">
+
+    <button type="submit" class="btn btn-outline-primary mb-2 mr-sm-2">修正</button>
+    <button type="submit" class="btn btn-outline-danger mb-2 mr-sm-2">刪除</button>
+</form>
+
+{% endfor %}
+
+
+
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
+
+{% block Script %}
+
+{% endblock %}

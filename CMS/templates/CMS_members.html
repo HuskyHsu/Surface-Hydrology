@@ -1,0 +1,64 @@
+{% extends "CMS.html" %}
+
+{% block title %}
+後台-研究成員
+{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block container %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">實驗室人員管理</h1>
+    <!-- <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary">Share</button>
+            <button class="btn btn-sm btn-outline-secondary">Export</button>
+        </div>
+        <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+        </button>
+    </div> -->
+</div>
+
+<!-- <canvas class="my-4" id="myChart" width="900" height="380"></canvas> -->
+<form class="form-inline">
+
+    <input type="text" class="form-control col-md-2 mb-2 mr-sm-2" placeholder="姓名">
+    <input type="text" class="form-control col-md-2 mb-2 mr-sm-2" placeholder="分類">
+
+
+    <button type="submit" class="btn btn-warning mb-2 mr-sm-2">新增</button>
+
+</form>
+{% for item in members %}
+<form class="form-inline">
+
+    <input type="text" class="form-control col-md-2 mb-2 mr-sm-2" placeholder="姓名" value="{{item.name}}">
+
+    <select class="form-control col-md-2 mb-2 mr-sm-2">
+        <option value="碩士生" {% if item.type == "碩士生" %}selected="selected"{% endif %}>碩士生</option>
+        <option value="博士生" {% if item.type == "博士生" %}selected="selected"{% endif %}>博士生</option>
+        <option value="研究助理" {% if item.type == "研究助理" %}selected="selected"{% endif %}>研究助理</option>
+        <option value="畢業生" {% if item.type == "畢業生" %}selected="selected"{% endif %}>畢業生</option>
+    </select>
+
+    <button type="submit" class="btn btn-outline-primary mb-2 mr-sm-2">修正</button>
+    <button type="submit" class="btn btn-outline-danger mb-2 mr-sm-2">刪除</button>
+</form>
+
+{% endfor %}
+
+
+
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
+
+{% block Script %}
+
+{% endblock %}
