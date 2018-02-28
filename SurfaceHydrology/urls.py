@@ -19,6 +19,7 @@ from django.contrib import admin
 from home import views as home_views
 from person import urls as person_urls
 from CMS import urls as CMS_urls
+from api import urls as api_urls
 
 # from uploadFlie import views as upload_views
 from uploadFile import urls as uploadFile_urls
@@ -33,6 +34,7 @@ urlpatterns = [
     url(r'^person/', include(person_urls)),
     url(r'^_data/', include(data_urls)),
     url(r'^CMS/', include(CMS_urls)),
+    url(r'^api/', include(api_urls)),
     # url(r'^upload$', upload_views.home_page, name='upload'),
     url(r'^upload/', include(uploadFile_urls)),
     url(r'^data/', include(getData_urls)),
