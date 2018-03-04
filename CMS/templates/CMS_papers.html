@@ -29,6 +29,7 @@
     <input name="author" type="text" class="form-control col-md-4 mb-2 mr-sm-2 is-invalid" placeholder="作者">
     <input name="date" type="text" class="form-control col-md-1 mb-2 mr-sm-2 is-invalid" placeholder="發表日期">
     <input name="title" type="text" class="form-control col-md-4 mb-2 mr-sm-2 is-invalid" placeholder="題目">
+    
     <input name="type" type="text" class="d-none" value="add">
     {% csrf_token %}
     <button type="submit" class="btn btn-warning mb-2 mr-sm-2">新增</button>
@@ -37,7 +38,7 @@
 {% for item in papers %}
 <form class="form-inline" action="/api/update/papers" method="post">
 
-    <input name="pid" type="text" class="d-none" placeholder="單位" value="{{item.pid}}">
+    <input name="pid" type="text" class="d-none" value="{{item.pid}}">
     <input name="author" type="text" class="form-control col-md-4 mb-2 mr-sm-2" placeholder="作者" value="{{item.author}}">
     <input name="date" type="text" class="form-control col-md-1 mb-2 mr-sm-2" placeholder="發表日期" value="{{item.date}}">
     <input name="title" type="text" class="form-control col-md-4 mb-2 mr-sm-2" placeholder="題目" value="{{item.title}}">

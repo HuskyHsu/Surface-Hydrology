@@ -38,7 +38,7 @@
 </form>
 {% for item in work_experience %}
 <form class="form-inline" action="/api/update/work_experience" method="post">
-    <input type="text" name="pid" class="d-none" placeholder="單位" value="{{item.pid}}">
+    <input type="text" name="pid" class="d-none" value="{{item.pid}}">
     <input type="text" name="unit" class="form-control mb-2 mr-sm-2" placeholder="單位" value="{{item.unit}}">
     <input type="text" name="department" class="form-control mb-2 mr-sm-2" placeholder="部門" value="{{item.department|default_if_none:""}}">
     <input type="text" name="title" class="form-control mb-2 mr-sm-2" placeholder="職稱" value="{{item.title}}">

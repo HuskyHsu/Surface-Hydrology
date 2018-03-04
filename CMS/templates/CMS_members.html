@@ -23,31 +23,127 @@
     </div> -->
 </div>
 
-<!-- <canvas class="my-4" id="myChart" width="900" height="380"></canvas> -->
-<form class="form-inline">
+<form action="/api/update/members" method="post">
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label>姓名</label>
+            <input name="name" type="text" class="form-control is-invalid" placeholder="姓名">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="inputPassword4">類別</label>
+            <select name="type" class="form-control is-invalid">
+                <option value="碩士生">碩士生</option>
+                <option value="博士生">博士生</option>
+                <option value="畢業生">畢業生</option>
+                <option value="研究助理">研究助理</option>
+            </select>
+        </div>
+    </div>
 
-    <input type="text" class="form-control col-md-2 mb-2 mr-sm-2" placeholder="姓名">
-    <input type="text" class="form-control col-md-2 mb-2 mr-sm-2" placeholder="分類">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>碩士論文題目</label>
+            <input name="master_disseration_title" type="text" class="form-control" placeholder="論文題目">
+        </div>
+        <div class="form-group col-md-4">
+            <label>碩士論文連結</label>
+            <input name="master_disseration_url" type="text" class="form-control" placeholder="論文連結">
+        </div>
+        <div class="form-group col-md-2">
+            <label>碩士畢業年份</label>
+            <input name="master_graduation_year" type="number" class="form-control" placeholder="畢業年份">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>博士論文題目</label>
+            <input name="doctor_disseration_title" type="text" class="form-control" placeholder="論文題目">
+        </div>
+        <div class="form-group col-md-4">
+            <label>博士論文連結</label>
+            <input name="doctor_disseration_url" type="text" class="form-control" placeholder="論文連結">
+        </div>
+        <div class="form-group col-md-2">
+            <label>博士畢業年份</label>
+            <input name="doctor_graduation_year" type="number" class="form-control" placeholder="畢業年份">
+        </div>
+    </div>
 
+    <input name="type_crud" type="text" class="d-none" value="add">
+    {% csrf_token %}
 
-    <button type="submit" class="btn btn-warning mb-2 mr-sm-2">新增</button>
+    <button type="submit" class="btn btn-warning">新增</button>
 
 </form>
+
+
+<hr>
+
 {% for item in members %}
-<form class="form-inline">
+<form action="/api/update/members" method="post">
+    <input name="pid" type="text" class="d-none" value="{{item.pid}}">
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label>姓名</label>
+            <input name="name" type="text" class="form-control" placeholder="姓名" value="{{item.name}}">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="inputPassword4">類別</label>
+            <select name="type" class="form-control">
+                <option value="碩士生" {% if item.type == "碩士生" %}selected="selected"{% endif %}>碩士生</option>
+                <option value="博士生" {% if item.type == "博士生" %}selected="selected"{% endif %}>博士生</option>
+                <option value="研究助理" {% if item.type == "研究助理" %}selected="selected"{% endif %}>研究助理</option>
+                <option value="畢業生" {% if item.type == "畢業生" %}selected="selected"{% endif %}>畢業生</option>
+            </select>
+        </div>
+    </div>
 
-    <input type="text" class="form-control col-md-2 mb-2 mr-sm-2" placeholder="姓名" value="{{item.name}}">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>碩士論文題目</label>
+            <input name="master_disseration_title" type="text" class="form-control" placeholder="論文題目" value={{item.master_disseration_title|default_if_none:""}}>
+        </div>
+        <div class="form-group col-md-4">
+            <label>碩士論文連結</label>
+            <input name="master_disseration_url" type="text" class="form-control" placeholder="論文連結" value={{item.master_disseration_url|default_if_none:""}}>
+        </div>
+        <div class="form-group col-md-2">
+            <label>碩士畢業年份</label>
+            <input name="master_graduation_year" type="number" class="form-control" placeholder="畢業年份" value={{item.master_graduation_year|default_if_none:""}}>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>博士論文題目</label>
+            <input name="doctor_disseration_title" type="text" class="form-control" placeholder="論文題目" value={{item.doctor_disseration_title|default_if_none:""}}>
+        </div>
+        <div class="form-group col-md-4">
+            <label>博士論文連結</label>
+            <input name="doctor_disseration_url" type="text" class="form-control" placeholder="論文連結" value={{item.doctor_disseration_url|default_if_none:""}}>
+        </div>
+        <div class="form-group col-md-2">
+            <label>博士畢業年份</label>
+            <input name="doctor_graduation_year" type="number" class="form-control" placeholder="畢業年份" value={{item.doctor_graduation_year|default_if_none:""}}>
+        </div>
+    </div>
 
-    <select class="form-control col-md-2 mb-2 mr-sm-2">
-        <option value="碩士生" {% if item.type == "碩士生" %}selected="selected"{% endif %}>碩士生</option>
-        <option value="博士生" {% if item.type == "博士生" %}selected="selected"{% endif %}>博士生</option>
-        <option value="研究助理" {% if item.type == "研究助理" %}selected="selected"{% endif %}>研究助理</option>
-        <option value="畢業生" {% if item.type == "畢業生" %}selected="selected"{% endif %}>畢業生</option>
-    </select>
-
-    <button type="submit" class="btn btn-outline-primary mb-2 mr-sm-2">修正</button>
-    <button type="submit" class="btn btn-outline-danger mb-2 mr-sm-2">刪除</button>
+    <div class="form-row">
+        <div class="form-group col-md-1">
+            <select name="type_crud" class="form-control">
+                <option value="modify">修正</option>
+                <option value="delete">刪除</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <button type="submit" class="btn btn-outline-primary mb-2 mr-sm-2">送出</button>
+        </div>
+        <div class="form-group col-md-4">
+            {% csrf_token %}
+        </div>
+    </div>
+    <hr>
 </form>
+
 
 {% endfor %}
 

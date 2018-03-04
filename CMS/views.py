@@ -22,7 +22,7 @@ def papers(request):
 
 def members(request):
 
-    members = Members.objects.all().order_by('-type')
+    members = Members.objects.all().order_by('-type', '-pid')
 
     return render(request, 'CMS_members.html', {
         'members': members,
