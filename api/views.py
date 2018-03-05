@@ -1,6 +1,10 @@
+import asyncio
+
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from database.models import WorkExperience, Papers, Members
+from process import LHC
+
 
 def is_blank(s):
     if s != '':
@@ -64,6 +68,7 @@ def papers(request):
 
     return HttpResponseRedirect('/CMS/papers')
 
+# 實驗室成員
 def members(request):
 
     if request.method == 'POST':
@@ -98,3 +103,32 @@ def members(request):
         print('get')
 
     return HttpResponseRedirect('/CMS/members')
+
+# 上傳檔案
+def upload_file(request):
+    # POST and have file
+    if request.method == 'POST' and request.FILES != {}:
+
+        # OPEN async
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        # loop = asyncio.get_event_loop()
+
+        # create coroutine object
+        tasks = [ asyncio.ensure_future(
+            LHC.Site().create(file)
+                .readFile( request.FILES[file], request.POST["date"] )
+                .asyncInsert(loop)
+            ) for file in request.FILES.keys()]
+
+        # run async
+        loop.run_until_complete(asyncio.wait(tasks))
+
+        # get return value
+        success = [task.result() for task in tasks]
+        print(success)
+        return HttpResponseRedirect('/CMS/upload_file')
+
+    else:
+        print('QQ')
+        return HttpResponseRedirect('/CMS/upload_file')
