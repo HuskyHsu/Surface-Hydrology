@@ -1,5 +1,6 @@
 import asyncio
 
+from django.contrib import auth
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from database.models import WorkExperience, Papers, Members
@@ -11,6 +12,28 @@ def is_blank(s):
         return s
     else:
         return None
+
+# 登入
+def login(request):
+
+    # if request.user.is_authenticated(): 
+    #     return HttpResponseRedirect('/index/')
+
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+    
+    user = auth.authenticate(username=username, password=password)
+
+    if user is not None and user.is_active:
+        auth.login(request, user)
+        return HttpResponseRedirect('/CMS/')
+    else:
+        return render(request, 'signin.html')
+
+# 登出
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect('/')
 
 # 工作經歷
 def work_experience(request):

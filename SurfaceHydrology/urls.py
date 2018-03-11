@@ -31,8 +31,8 @@ from django.views.generic import TemplateView
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
     url(r'^$', home_views.home_page, name='home'),
+    url(r'^admin/', admin.site.urls),
     url(r'^person/', include(person_urls)),
     url(r'^_data/', include(data_urls)),
     url(r'^CMS/', include(CMS_urls)),

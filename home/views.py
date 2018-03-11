@@ -1,5 +1,5 @@
 from django.shortcuts import render
-# from process import LHC
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def home_page(request):
