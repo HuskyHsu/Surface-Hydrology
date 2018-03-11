@@ -28,8 +28,10 @@ from data import urls as data_urls
 
 from django.views.generic import TemplateView
 
+admin.autodiscover()
+
 urlpatterns = [
-    # url(r'^admin/', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
     url(r'^$', home_views.home_page, name='home'),
     url(r'^person/', include(person_urls)),
     url(r'^_data/', include(data_urls)),
