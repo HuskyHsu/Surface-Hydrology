@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from database.models import Papers, WorkExperience, Members
 
-# Create your views here.
+# 後台 - 工作經歷
+@login_required(login_url='/api/login/')
 def work_experience(request):
 
     work_experience = WorkExperience.objects.all().order_by('-start_year')
@@ -11,6 +13,8 @@ def work_experience(request):
         'which': '工作經歷'
     })
 
+# 後台 - 代表著作
+@login_required(login_url='/api/login/')
 def papers(request):
 
     papers = Papers.objects.all().order_by('-date')
@@ -20,6 +24,8 @@ def papers(request):
         'which': '代表著作'
     })
 
+# 後台 - 成員管理
+@login_required(login_url='/api/login/')
 def members(request):
 
     members = Members.objects.all().order_by('-type', '-pid')
@@ -29,6 +35,8 @@ def members(request):
         'which': '實驗室成員'
     })
 
+# 後台 - 上傳測站資料
+@login_required(login_url='/api/login/')
 def upload_file(request):
 
     field = [
