@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'person',
     'CMS',
     'data',
+    'api',
 ]
 
 MIDDLEWARE = [
