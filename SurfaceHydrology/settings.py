@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'database',
     'person',
     'CMS',
-    'uploadFile',
     'data',
 ]
 
