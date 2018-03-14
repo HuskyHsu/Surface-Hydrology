@@ -3,7 +3,7 @@ var app = new Vue({
     delimiters: ['[[', ']]'],
     created: function () {
         var vm = this;
-        axios.get('/data/all/')
+        axios.get('/api/get/lhc/all')
             .then(function (response) {
                 vm.siteBasic = response.data.success;
                 vm.ajaxData_();
@@ -188,7 +188,7 @@ var app = new Vue({
             function () {
 
                 var vm = this;
-                axios.get(`/data/${vm.site}/${vm.item}/${vm.startTime}/${vm.endTime}/`)
+                axios.get(`/api/get/lhc/${vm.site}/${vm.item}/${vm.startTime}/${vm.endTime}`)
                     .then(function (response) {
                         vm.timeSeries = response.data.data;
                     })
@@ -200,7 +200,7 @@ var app = new Vue({
         ),
         ajaxData_: function () {
             var vm = this;
-            axios.get(`/data/${vm.site}/${vm.item}/${vm.startTime}/${vm.endTime}/`)
+            axios.get(`/api/get/lhc/${vm.site}/${vm.item}/${vm.startTime}/${vm.endTime}`)
                 .then(function (response) {
                     vm.timeSeries = response.data.data;
                 })
@@ -210,7 +210,7 @@ var app = new Vue({
         },
         ajaxCalendar: function (capa, item){
             var vm = this;
-            axios.get(`/data/${capa}/calendarGraph/${item}/`)
+            axios.get(`/api/get/lhc/${capa}/calendarGraph/${item}`)
             .then(function (response) {
                 vm.calendar = response.data.success;
                 vm.plotCalendarGraph(vm.calendar)
