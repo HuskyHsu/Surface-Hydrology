@@ -6,7 +6,7 @@ var app = new Vue({
         axios.get('/api/get/lhc/all')
             .then(function (response) {
                 vm.siteBasic = response.data.success;
-                vm.ajaxData_();
+                // vm.ajaxData_();
                 // vm.ajaxCalendar(vm.siteBasic[0].name ,vm.siteBasic[0].field[0]);
                 // vm.plotCalendarGraph(vm.calendar);
             })
