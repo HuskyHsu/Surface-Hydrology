@@ -16,8 +16,8 @@ def is_blank(s):
 # 登入
 def login(request):
 
-    # if request.user.is_authenticated(): 
-    #     return HttpResponseRedirect('/index/')
+    if request.user.is_authenticated(): 
+        return HttpResponseRedirect('/CMS/')
 
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')

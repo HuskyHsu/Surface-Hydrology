@@ -13,15 +13,31 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+
+    <nav class="navbar navbar-expand sticky-top navbar-dark bg-dark p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">後臺管理</a>
+        <div class="collapse navbar-collapse" id="navbarsExample02">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">前台畫面 <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+          <ul class="navbar-nav px-3">
+              <li class="nav-item text-nowrap">
+                <a class="nav-link" href="/api/logout">Sign out</a>
+              </li>
+            </ul>
+        </div>
+      </nav>
+
+  <!-- <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">後臺管理</a>
-    <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
         <a class="nav-link" href="/api/logout">Sign out</a>
       </li>
     </ul>
-  </nav>
+  </nav> -->
   
   <div class="container-fluid">
     <div class="row">
