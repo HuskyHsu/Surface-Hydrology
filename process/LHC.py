@@ -126,7 +126,12 @@ class siteObject(object):
 
     # 取得時序資料
     def timeSeries(self, item, startTime, endTime):
-        SQLString = 'select TIMESTAMP, {} from {} where TIMESTAMP BETWEEN %s and %s'.format(item, self.tableName)
+
+        SQLString = 'select TIMESTAMP, {} from {} where TIMESTAMP BETWEEN %s and %s;'.format(str(item), self.tableName)
+        
+        print(item)
+        print(SQLString)
+        
         with connection.cursor() as cursor:
             try:
                 cursor.execute(SQLString, [startTime, endTime])
@@ -139,7 +144,10 @@ class siteObject(object):
 
             except:
                 cursor.close()
-                # print(sys.exc_info()[0])
+                a, b, c = sys.exc_info()
+                print(a)
+                print(b)
+                print(c)
                 return False
         return results
 

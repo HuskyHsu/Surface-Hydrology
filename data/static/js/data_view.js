@@ -7,7 +7,7 @@ var app = new Vue({
             .then(function (response) {
                 vm.siteBasic = response.data.success;
                 vm.ajaxData_();
-                vm.ajaxCalendar(vm.siteBasic[0].name ,vm.siteBasic[0].field[0]);
+                // vm.ajaxCalendar(vm.siteBasic[0].name ,vm.siteBasic[0].field[0]);
                 // vm.plotCalendarGraph(vm.calendar);
             })
             .catch(function (error) {
@@ -55,7 +55,7 @@ var app = new Vue({
             svg.selectAll("g").remove();
             var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-            var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S");
+            var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
             // 2015-05-10T05:30:00
             var x = d3.scaleTime()
                 .rangeRound([0, width]);
@@ -229,14 +229,14 @@ var app = new Vue({
         },
         item: function () {
             this.ajaxData_();
-            this.ajaxCalendar(this.site ,this.item);
+            // this.ajaxCalendar(this.site ,this.item);
         },
         timeSeries: function () {
             this.plotLine(this.item, this.timeSeries);
         },
         site: function () {
             this.checkedItems = [];
-            this.ajaxCalendar(this.site ,this.item);
+            // this.ajaxCalendar(this.site ,this.item);
         }
     }
 })
