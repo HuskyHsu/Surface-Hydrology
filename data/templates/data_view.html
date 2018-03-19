@@ -35,6 +35,18 @@
                 <option v-for="(item, index) in siteField">[[item]]</option>
             </select>
         </div>
+        <div class="form-group">
+            <label>下載項目</label>
+            <br>
+            <div class="form-check">
+                <div v-for="(item, index) in siteField">
+                    <input type="checkbox" class="form-check-input" v-bind:value="[[item]]" v-bind:id="[[item]]" v-model="checkedItems">
+                    <label class="form-check-label" v-bind:for="[[item]]">[[item]]</label>
+                </div>
+            </div>
+            <a class="btn btn-primary" v-bind:href="[['/api/get/lhc/' + site + '/output/' + checkedItems + '/' + startTime + '/' + endTime]]" role="button">下載</a>
+        </div>
+
     </div>
     <div class="col-md-9">
         <svg id="timeSeries">
