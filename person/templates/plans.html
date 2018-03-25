@@ -1,0 +1,177 @@
+{% extends "..\..\home\templates\base.html" %}
+
+{% block title %}
+研究計畫
+{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block container %}
+<div class="row">
+    <div class="col-md-12 blog-main">
+
+        <div class="blog-post">
+            <h2 class="blog-post-title">研究計畫</h2>
+        </div>
+        
+        <div class="blog-post">
+            <h3>科技部/國科會計畫</h3>
+        
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width:50px">年度</th>
+                        <th scope="col">計畫名稱</th>
+                        <th scope="col" style="width:120px">擔任之工作</th>
+                        <th scope="col" style="width:150px">執行期間</th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                    {% for item in most %}
+                    <tr>
+                        <th scope="row">{{item.year}}</th>
+                        <td>{{item.name}}</td>
+                        <td>{{item.job}}</td>
+                        <td>{{item.start_time|date:"Y-m"}}~{{item.end_time|date:"Y-m"}}</td>
+                    </tr>
+                    {% endfor %}
+        
+                </tbody>
+            </table>
+        
+        </div>
+        
+        <div class="blog-post">
+            <h3>經濟部水利署計畫</h3>
+        
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width:50px">年度</th>
+                        <th scope="col">計畫名稱</th>
+                        <th scope="col" style="width:120px">擔任之工作</th>
+                        <th scope="col" style="width:150px">執行期間</th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                    {% for item in wra %}
+                    <tr>
+                        <th scope="row">{{item.year}}</th>
+                        <td>{{item.name}}</td>
+                        <td>{{item.job}}</td>
+                        <td>{{item.start_time|date:"Y-m"}}~{{item.end_time|date:"Y-m"}}</td>
+                    </tr>
+                    {% endfor %}
+        
+                </tbody>
+            </table>
+        
+        </div>
+        
+        <div class="blog-post">
+            <h3>交通部中央氣象局計畫</h3>
+        
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width:50px">年度</th>
+                        <th scope="col">計畫名稱</th>
+                        <th scope="col" style="width:120px">擔任之工作</th>
+                        <th scope="col" style="width:150px">執行期間</th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                    {% for item in cwb %}
+                    <tr>
+                        <th scope="row">{{item.year}}</th>
+                        <td>{{item.name}}</td>
+                        <td>{{item.job}}</td>
+                        <td>{{item.start_time|date:"Y-m"}}~{{item.end_time|date:"Y-m"}}</td>
+                    </tr>
+                    {% endfor %}
+        
+                </tbody>
+            </table>
+        
+        </div>
+
+        <div class="blog-post">
+            <h3>行政院原子能委員會放射性物料管理局計畫</h3>
+        
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width:50px">年度</th>
+                        <th scope="col">計畫名稱</th>
+                        <th scope="col" style="width:120px">擔任之工作</th>
+                        <th scope="col" style="width:150px">執行期間</th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                    {% for item in aec %}
+                    <tr>
+                        <th scope="row">{{item.year}}</th>
+                        <td>{{item.name}}</td>
+                        <td>{{item.job}}</td>
+                        <td>{{item.start_time|date:"Y-m"}}~{{item.end_time|date:"Y-m"}}</td>
+                    </tr>
+                    {% endfor %}
+        
+                </tbody>
+            </table>
+        
+        </div>
+
+        <div class="blog-post">
+            <h3>產學合作及其他計畫</h3>
+        
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width:50px">年度</th>
+                        <th scope="col">計畫名稱</th>
+                        <th scope="col" style="width:120px">擔任之工作</th>
+                        <th scope="col" style="width:150px">執行期間</th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                    {% for item in other %}
+                    <tr>
+                        <th scope="row">{{item.year}}</th>
+                        <td>{{item.name}}</td>
+                        <td>{{item.job}}</td>
+                        <td>{{item.start_time|date:"Y-m"}}~{{item.end_time|date:"Y-m"}}</td>
+                    </tr>
+                    {% endfor %}
+        
+                </tbody>
+            </table>
+        
+        </div>
+
+</div>
+
+    <!-- /.blog-main -->
+<!-- 
+    <aside class="col-md-4 blog-sidebar">
+
+    </aside> -->
+    <!-- /.blog-sidebar -->
+
+</div>
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
+
+{% block Script %}
+
+{% endblock %}
