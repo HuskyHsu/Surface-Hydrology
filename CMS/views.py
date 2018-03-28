@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from database.models import Papers, WorkExperience, Members
+from database.models import Papers, WorkExperience, Members, Plans
 
 # 後台 - 工作經歷
 @login_required(login_url='/api/login/')
@@ -34,6 +34,18 @@ def members(request):
         'members': members,
         'which': '實驗室成員'
     })
+
+# 後台 - 成員管理
+@login_required(login_url='/api/login/')
+def plans(request):
+
+    plans = Plans.objects.all().order_by('-year')
+
+    return render(request, 'CMS_plans.html', {
+        'plans': plans,
+        'which': '研究計畫'
+    })
+
 
 # 後台 - 上傳測站資料
 @login_required(login_url='/api/login/')

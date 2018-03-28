@@ -1,0 +1,162 @@
+{% extends "CMS.html" %}
+
+{% block title %}
+後台-工作經歷
+{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block container %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">工作經歷修正</h1>
+    <!-- <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary">Share</button>
+            <button class="btn btn-sm btn-outline-secondary">Export</button>
+        </div>
+        <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+        </button>
+    </div> -->
+</div>
+
+<!-- <canvas class="my-4" id="myChart" width="900" height="380"></canvas> -->
+<form action="/api/update/work_experience" method="post">
+    <div class="form-row">
+        <div class="form-group col-md-1">
+            <label>年度</label>
+            <input name="year" type="number" class="form-control" placeholder="年度" value="{{item.year}}">
+        </div>
+        <div class="form-group col-md-5">
+            <label for="inputPassword4">單位</label>
+            <select name="unit" class="form-control">
+                <option value="科技部/國科會計畫" {% if item.unit == "科技部/國科會計畫" %}selected="selected"{% endif %}>科技部/國科會計畫</option>
+                <option value="經濟部水利署計畫" {% if item.unit == "經濟部水利署計畫" %}selected="selected"{% endif %}>經濟部水利署計畫</option>
+                <option value="交通部中央氣象局計畫" {% if item.unit == "交通部中央氣象局計畫" %}selected="selected"{% endif %}>交通部中央氣象局計畫</option>
+                <option value="行政院原子能委員會放射性物料管理局計畫" {% if item.unit == "行政院原子能委員會放射性物料管理局計畫" %}selected="selected"{% endif %}>行政院原子能委員會放射性物料管理局計畫</option>
+                <option value="產學合作及其他計畫" {% if item.unit == "產學合作及其他計畫" %}selected="selected"{% endif %}>產學合作及其他計畫</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <label>擔任之工作</label>
+            <input name="job" type="text" class="form-control" placeholder="擔任之工作" value="{{item.job}}">
+        </div>
+        <div class="form-group col-md-2">
+            <label>執行期間(起)</label>
+            <input name="start_time" type="date" class="form-control" placeholder="執行期間(起)" value="{{item.start_time|date:"Y-m-d"}}">
+        </div>
+        <div class="form-group col-md-2">
+            <label>執行期間(訖)</label>
+            <input name="end_time" type="date" class="form-control" placeholder="執行期間(訖)" value="{{item.end_time|date:"Y-m-d"}}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label>計畫名稱</label>
+            <input name="name" type="text" class="form-control" placeholder="計畫名稱" value={{item.name}}>
+        </div>
+    </div>
+
+    <input name="type_crud" type="text" class="d-none" value="add">
+    {% csrf_token %}
+
+    <button type="submit" class="btn btn-warning">新增</button>
+
+
+</form>
+
+<hr>
+{% for item in plans %}
+<form action="/api/update/plans" method="post">
+    <input name="pid" type="text" class="d-none" value="{{item.pid}}">
+    <div class="form-row">
+        <div class="form-group col-md-1">
+            <label>年度</label>
+            <input name="year" type="number" class="form-control" placeholder="年度" value="{{item.year}}">
+        </div>
+        <div class="form-group col-md-5">
+            <label for="inputPassword4">單位</label>
+            <select name="unit" class="form-control">
+                <option value="科技部/國科會計畫" {% if item.unit == "科技部/國科會計畫" %}selected="selected"{% endif %}>科技部/國科會計畫</option>
+                <option value="經濟部水利署計畫" {% if item.unit == "經濟部水利署計畫" %}selected="selected"{% endif %}>經濟部水利署計畫</option>
+                <option value="交通部中央氣象局計畫" {% if item.unit == "交通部中央氣象局計畫" %}selected="selected"{% endif %}>交通部中央氣象局計畫</option>
+                <option value="行政院原子能委員會放射性物料管理局計畫" {% if item.unit == "行政院原子能委員會放射性物料管理局計畫" %}selected="selected"{% endif %}>行政院原子能委員會放射性物料管理局計畫</option>
+                <option value="產學合作及其他計畫" {% if item.unit == "產學合作及其他計畫" %}selected="selected"{% endif %}>產學合作及其他計畫</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <label>擔任之工作</label>
+            <input name="job" type="text" class="form-control" placeholder="擔任之工作" value="{{item.job}}">
+        </div>
+        <div class="form-group col-md-2">
+            <label>執行期間(起)</label>
+            <input name="start_time" type="date" class="form-control" placeholder="執行期間(起)" value="{{item.start_time|date:"Y-m-d"}}">
+        </div>
+        <div class="form-group col-md-2">
+            <label>執行期間(訖)</label>
+            <input name="end_time" type="date" class="form-control" placeholder="執行期間(訖)" value="{{item.end_time|date:"Y-m-d"}}">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label>計畫名稱</label>
+            <input name="name" type="text" class="form-control" placeholder="計畫名稱" value={{item.name}}>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-1">
+            <select name="type_crud" class="form-control">
+                <option value="modify">修正</option>
+                <option value="delete">刪除</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <button type="submit" class="btn btn-outline-primary mb-2 mr-sm-2">送出</button>
+        </div>
+        <div class="form-group col-md-4">
+            {% csrf_token %}
+        </div>
+    </div>
+    <hr>
+</form>
+
+
+
+
+<!-- <form class="form-inline" action="/api/update/plans" method="post">
+    <input type="text" name="pid" class="d-none" value="{{item.pid}}">
+    
+    <input type="text" name="year" class="form-control col-md-1 mb-2 mr-sm-2" placeholder="年度" value="{{item.year}}">
+    <input type="text" name="unit" class="form-control mb-2 mr-sm-2" placeholder="單位" value="{{item.unit}}">
+    <input type="text" name="name" class="form-control mb-2 mr-sm-2" placeholder="計畫名稱" value="{{item.name}}">
+    <input type="text" name="job" class="form-control col-md-1 mb-2 mr-sm-2" placeholder="擔任之工作" value="{{item.job}}">
+    <input type="date" name="start_Year" class="form-control col-md-1 mb-2 mr-sm-2" placeholder="起始日期" value="{{item.start_time|date:"Y-m-d"}}">
+    <input type="date" name="end_Year" class="form-control col-md-1 mb-2 mr-sm-2" placeholder="結束日期" value="{{item.end_time|date:"Y-m-d"}}">
+    <input type="text" name="type" class="d-none" value="modify">
+    <select class="form-control mb-2 mr-sm-2" name="type">
+        <option value="modify">修正</option>
+        <option value="delete">刪除</option>
+    </select>
+    {% csrf_token %}
+    <button type="submit" class="btn btn-outline-primary mb-2 mr-sm-2">送出</button>
+</form> -->
+
+{% endfor %}
+
+
+
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
+
+{% block Script %}
+
+{% endblock %}
