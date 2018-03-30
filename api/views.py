@@ -3,7 +3,7 @@ import asyncio
 from django.contrib import auth
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from database.models import WorkExperience, Papers, Members
+from database.models import WorkExperience, Papers, Members, Plans
 from process import LHC
 
 
@@ -40,7 +40,7 @@ def work_experience(request):
 
     if request.method == 'POST':
 
-        if request.POST["type"] == 'add':
+        if request.POST["type_crud"] == 'add':
             WorkExperience.objects.create(
                 unit = request.POST["unit"],
                 department = is_blank(request.POST["department"]),
@@ -48,7 +48,7 @@ def work_experience(request):
                 start_year = int(request.POST["start_Year"]),
                 end_year = is_blank(request.POST["end_Year"])
             )
-        elif request.POST["type"] == 'modify':
+        elif request.POST["type_crud"] == 'modify':
             WorkExperience.objects.filter(pid=request.POST["pid"]).update(
                 unit = request.POST["unit"],
                 department = is_blank(request.POST["department"]),
@@ -57,7 +57,7 @@ def work_experience(request):
                 end_year = is_blank(request.POST["end_Year"])
             )
 
-        elif request.POST["type"] == 'delete':
+        elif request.POST["type_crud"] == 'delete':
             WorkExperience.objects.filter(pid=request.POST["pid"]).delete()
 
     else:
@@ -70,20 +70,20 @@ def papers(request):
 
     if request.method == 'POST':
 
-        if request.POST["type"] == 'add':
+        if request.POST["type_crud"] == 'add':
             Papers.objects.create(
                 author = request.POST["author"],
                 date = request.POST["date"],
                 title = request.POST["title"]
             )
-        elif request.POST["type"] == 'modify':
+        elif request.POST["type_crud"] == 'modify':
             Papers.objects.filter(pid=request.POST["pid"]).update(
                 author = request.POST["author"],
                 date = request.POST["date"],
                 title = request.POST["title"]
             )
 
-        elif request.POST["type"] == 'delete':
+        elif request.POST["type_crud"] == 'delete':
             Papers.objects.filter(pid=request.POST["pid"]).delete()
 
     else:
@@ -126,6 +126,39 @@ def members(request):
         print('get')
 
     return HttpResponseRedirect('/CMS/members')
+
+# 研究計畫
+def plans(request):
+
+    if request.method == 'POST':
+
+        if request.POST["type_crud"] == 'add':
+            Plans.objects.create(
+                year = request.POST["year"],
+                unit = request.POST["unit"],
+                name = request.POST["name"],
+                job = request.POST["job"],
+                start_time = request.POST["start_time"],
+                end_time = request.POST["end_time"],
+            )
+        elif request.POST["type_crud"] == 'modify':
+            Plans.objects.filter(pid=request.POST["pid"]).update(
+                year = request.POST["year"],
+                unit = request.POST["unit"],
+                name = request.POST["name"],
+                job = request.POST["job"],
+                start_time = request.POST["start_time"],
+                end_time = request.POST["end_time"],
+            )
+
+        elif request.POST["type_crud"] == 'delete':
+            Plans.objects.filter(pid=request.POST["pid"]).delete()
+
+    else:
+        print('get')
+
+    return HttpResponseRedirect('/CMS/plans')
+
 
 # 上傳檔案
 def upload_file(request):

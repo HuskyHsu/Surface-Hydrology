@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^update/work_experience$', views.work_experience, name='update_work_experience'),
     url(r'^update/papers$', views.papers, name='update_papers'),
     url(r'^update/members$', views.members, name='update_members'),
+    url(r'^update/plans$', views.plans, name='update_plans'),
     url(r'^update/obs_datas$', views.upload_file, name='update_obs_data'),
     
     url(r'^get/lhc/(Capa\d+|all)$', obs_data.site_basic, name='get_site_basic'),
