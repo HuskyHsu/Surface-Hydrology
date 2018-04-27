@@ -22,8 +22,8 @@ body {
 .sub-cover{
     background: rgba(0, 0, 0, 0.5);
     /* color: black; */
-
-    padding: 0.5em 2em;
+    padding: 3em 2em;
+    margin: 5em -3em;
 }
 
 /* stylelint-disable selector-list-comma-newline-after */
