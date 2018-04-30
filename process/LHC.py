@@ -176,6 +176,10 @@ class Capa2(siteObject):
         lines = formatData(file)
 
         for i, line in enumerate(lines):
+
+            if line[0] != '121':
+                continue
+
             TIMESTAMP = formatTime(line[1], line[2], line[3])
 
             data = [TIMESTAMP]
