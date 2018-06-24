@@ -121,7 +121,7 @@ var app = new Vue({
 
             var svg = d3.select("#calendar-graph")
                 .selectAll("svg")
-                .data(d3.range(2013, 2016))
+                .data(d3.range(datum[0].date.substr(0,4), datum[datum.length - 1].date.substr(0,4) - 0 + 1))
                 .enter().append("svg")
                 .attr("width", width)
                 .attr("height", height)
@@ -235,7 +235,7 @@ var app = new Vue({
         },
         item: function () {
             this.ajaxData_();
-            // this.ajaxCalendar(this.site ,this.item);
+            this.ajaxCalendar(this.site ,this.item);
         },
         timeSeries: function () {
             this.plotLine(this.item, this.timeSeries);
