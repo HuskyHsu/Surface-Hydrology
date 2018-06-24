@@ -10,79 +10,6 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-class RawdataCapa2(models.Model):
-    timestamp = models.DateTimeField(db_column='TIMESTAMP', primary_key=True)  # Field name made lowercase.
-    t0 = models.DecimalField(db_column='T0', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-    t10 = models.DecimalField(db_column='T10', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-    t30 = models.DecimalField(db_column='T30', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-    t50 = models.DecimalField(db_column='T50', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-    t150 = models.DecimalField(db_column='T150', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-    sf10 = models.DecimalField(db_column='SF10', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    sf30 = models.DecimalField(db_column='SF30', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    sf50 = models.DecimalField(db_column='SF50', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    sf70 = models.DecimalField(db_column='SF70', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    sf90 = models.DecimalField(db_column='SF90', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    receivedate = models.DateField(db_column='ReceiveDate')  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'RAWDATA_Capa2'
-
-
-class RawdataCapa3(models.Model):
-    timestamp = models.DateTimeField(db_column='TIMESTAMP', primary_key=True)  # Field name made lowercase.
-    t0 = models.DecimalField(db_column='T0', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-    t10 = models.DecimalField(db_column='T10', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-    t30 = models.DecimalField(db_column='T30', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-    t50 = models.DecimalField(db_column='T50', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-    sf10 = models.DecimalField(db_column='SF10', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    sf30 = models.DecimalField(db_column='SF30', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    sf50 = models.DecimalField(db_column='SF50', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    sf70 = models.DecimalField(db_column='SF70', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    sf90 = models.DecimalField(db_column='SF90', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    receivedate = models.DateField(db_column='ReceiveDate')  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'RAWDATA_Capa3'
-
-
-class RawdataCapa4(models.Model):
-    timestamp = models.DateTimeField(db_column='TIMESTAMP', primary_key=True)  # Field name made lowercase.
-    ws_ms_avg = models.DecimalField(db_column='WS_ms_Avg', max_digits=6, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    winddir = models.DecimalField(db_column='WindDir', max_digits=6, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    airtc_20_avg = models.DecimalField(db_column='AirTC_20_Avg', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    rh_20 = models.DecimalField(db_column='RH_20', max_digits=6, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    airtc_15_avg = models.DecimalField(db_column='AirTC_15_Avg', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    rh_15 = models.DecimalField(db_column='RH_15', max_digits=6, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    airtc_10_avg = models.DecimalField(db_column='AirTC_10_Avg', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    rh_10 = models.DecimalField(db_column='RH_10', max_digits=6, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    airtc_5_avg = models.DecimalField(db_column='AirTC_5_Avg', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    rh_5 = models.DecimalField(db_column='RH_5', max_digits=6, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    nr_wm2_avg = models.DecimalField(db_column='NR_Wm2_Avg', max_digits=9, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    sevolt_avg = models.DecimalField(db_column='SEVolt_Avg', max_digits=7, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
-    temp_c_avg_1 = models.DecimalField(db_column='Temp_C_Avg_1', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    temp_c_avg_2 = models.DecimalField(db_column='Temp_C_Avg_2', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    temp_c_avg_3 = models.DecimalField(db_column='Temp_C_Avg_3', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    temp_c_avg_4 = models.DecimalField(db_column='Temp_C_Avg_4', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    temp_c_avg_5 = models.DecimalField(db_column='Temp_C_Avg_5', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    temp_c_avg_6 = models.DecimalField(db_column='Temp_C_Avg_6', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    result1_avg = models.DecimalField(db_column='Result1_Avg', max_digits=4, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
-    result2_avg = models.DecimalField(db_column='Result2_Avg', max_digits=4, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
-    result3_avg = models.DecimalField(db_column='Result3_Avg', max_digits=4, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
-    result4_avg = models.DecimalField(db_column='Result4_Avg', max_digits=4, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
-    result5_avg = models.DecimalField(db_column='Result5_Avg', max_digits=4, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
-    inf_data = models.DecimalField(db_column='Inf_data', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-    temp_c_avg_7 = models.DecimalField(db_column='Temp_C_Avg_7', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
-    rain_mm_tot = models.DecimalField(db_column='Rain_mm_Tot', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
-    pressure_avg = models.DecimalField(db_column='Pressure_Avg', max_digits=8, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
-    receivedate = models.DateField(db_column='ReceiveDate')  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'RAWDATA_Capa4'
-
-
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=80)
 
@@ -92,34 +19,34 @@ class AuthGroup(models.Model):
 
 
 class AuthGroupPermissions(models.Model):
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+    group_id = models.IntegerField()
+    permission_id = models.IntegerField()
 
     class Meta:
         managed = False
         db_table = 'auth_group_permissions'
-        unique_together = (('group', 'permission'),)
+        unique_together = (('group_id', 'permission_id'),)
 
 
 class AuthPermission(models.Model):
-    name = models.CharField(max_length=255)
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    content_type_id = models.IntegerField()
     codename = models.CharField(max_length=100)
 
     class Meta:
         managed = False
         db_table = 'auth_permission'
-        unique_together = (('content_type', 'codename'),)
+        unique_together = (('content_type_id', 'codename'),)
 
 
 class AuthUser(models.Model):
     password = models.CharField(max_length=128)
     last_login = models.DateTimeField(blank=True, null=True)
     is_superuser = models.IntegerField()
-    username = models.CharField(unique=True, max_length=150)
+    username = models.CharField(unique=True, max_length=30)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    email = models.CharField(max_length=254)
+    email = models.CharField(max_length=254, blank=True, null=True)
     is_staff = models.IntegerField()
     is_active = models.IntegerField()
     date_joined = models.DateTimeField()
@@ -130,23 +57,35 @@ class AuthUser(models.Model):
 
 
 class AuthUserGroups(models.Model):
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    user_id = models.IntegerField()
+    group_id = models.IntegerField()
 
     class Meta:
         managed = False
         db_table = 'auth_user_groups'
-        unique_together = (('user', 'group'),)
+        unique_together = (('user_id', 'group_id'),)
 
 
 class AuthUserUserPermissions(models.Model):
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+    user_id = models.IntegerField()
+    permission_id = models.IntegerField()
 
     class Meta:
         managed = False
         db_table = 'auth_user_user_permissions'
-        unique_together = (('user', 'permission'),)
+        unique_together = (('user_id', 'permission_id'),)
+
+
+class Course(models.Model):
+    pid = models.AutoField(primary_key=True)
+    class_number = models.CharField(max_length=6)
+    semester = models.CharField(max_length=1)
+    class_name = models.CharField(max_length=20)
+    contents = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = 'course'
 
 
 class DjangoAdminLog(models.Model):
@@ -155,8 +94,8 @@ class DjangoAdminLog(models.Model):
     object_repr = models.CharField(max_length=200)
     action_flag = models.SmallIntegerField()
     change_message = models.TextField()
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    content_type_id = models.IntegerField(blank=True, null=True)
+    user_id = models.IntegerField()
 
     class Meta:
         managed = False
@@ -209,6 +148,39 @@ class Members(models.Model):
         db_table = 'members'
 
 
+class NcuSite(models.Model):
+    timestamp = models.DateTimeField(db_column='TIMESTAMP', primary_key=True)  # Field name made lowercase.
+    sevolt_1 = models.DecimalField(db_column='SEVolt_1', max_digits=4, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
+    sevolt_2 = models.DecimalField(db_column='SEVolt_2', max_digits=4, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
+    sevolt_3 = models.DecimalField(db_column='SEVolt_3', max_digits=4, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
+    sevolt_4 = models.DecimalField(db_column='SEVolt_4', max_digits=4, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
+    sevolt_5 = models.DecimalField(db_column='SEVolt_5', max_digits=4, decimal_places=0, blank=True, null=True)  # Field name made lowercase.
+    level_1 = models.DecimalField(db_column='Level_1', max_digits=5, decimal_places=1, blank=True, null=True)  # Field name made lowercase.
+    level_2 = models.DecimalField(db_column='Level_2', max_digits=5, decimal_places=1, blank=True, null=True)  # Field name made lowercase.
+    level_3 = models.DecimalField(db_column='Level_3', max_digits=5, decimal_places=1, blank=True, null=True)  # Field name made lowercase.
+    level_4 = models.DecimalField(db_column='Level_4', max_digits=5, decimal_places=1, blank=True, null=True)  # Field name made lowercase.
+    level_5 = models.DecimalField(db_column='Level_5', max_digits=5, decimal_places=1, blank=True, null=True)  # Field name made lowercase.
+    sf10 = models.DecimalField(db_column='SF10', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    sf30 = models.DecimalField(db_column='SF30', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    sf50 = models.DecimalField(db_column='SF50', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    sf70 = models.DecimalField(db_column='SF70', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    sf100 = models.DecimalField(db_column='SF100', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    sf150 = models.DecimalField(db_column='SF150', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    sf200 = models.DecimalField(db_column='SF200', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    sf300 = models.DecimalField(db_column='SF300', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    sf400 = models.DecimalField(db_column='SF400', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    sf500 = models.DecimalField(db_column='SF500', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    ts1_p = models.DecimalField(db_column='TS1_P', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    ts1_temp = models.DecimalField(db_column='TS1_Temp', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    t8_p = models.DecimalField(db_column='T8_P', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    t8_temp = models.DecimalField(db_column='T8_Temp', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    receivedate = models.DateField(db_column='ReceiveDate')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'ncu_site'
+
+
 class Papers(models.Model):
     pid = models.AutoField(primary_key=True)
     author = models.CharField(max_length=200)
@@ -232,6 +204,79 @@ class Plans(models.Model):
     class Meta:
         managed = False
         db_table = 'plans'
+
+
+class RawdataCapa2(models.Model):
+    timestamp = models.DateTimeField(db_column='TIMESTAMP', primary_key=True)  # Field name made lowercase.
+    t0 = models.DecimalField(db_column='T0', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    t10 = models.DecimalField(db_column='T10', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    t30 = models.DecimalField(db_column='T30', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    t50 = models.DecimalField(db_column='T50', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    t150 = models.DecimalField(db_column='T150', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    sf10 = models.DecimalField(db_column='SF10', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    sf30 = models.DecimalField(db_column='SF30', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    sf50 = models.DecimalField(db_column='SF50', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    sf70 = models.DecimalField(db_column='SF70', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    sf90 = models.DecimalField(db_column='SF90', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    receivedate = models.DateField(db_column='ReceiveDate')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'rawdata_capa2'
+
+
+class RawdataCapa3(models.Model):
+    timestamp = models.DateTimeField(db_column='TIMESTAMP', primary_key=True)  # Field name made lowercase.
+    t0 = models.DecimalField(db_column='T0', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    t10 = models.DecimalField(db_column='T10', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    t30 = models.DecimalField(db_column='T30', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    t50 = models.DecimalField(db_column='T50', max_digits=5, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    sf10 = models.DecimalField(db_column='SF10', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    sf30 = models.DecimalField(db_column='SF30', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    sf50 = models.DecimalField(db_column='SF50', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    sf70 = models.DecimalField(db_column='SF70', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    sf90 = models.DecimalField(db_column='SF90', max_digits=3, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    receivedate = models.DateField(db_column='ReceiveDate')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'rawdata_capa3'
+
+
+class RawdataCapa4(models.Model):
+    timestamp = models.DateTimeField(db_column='TIMESTAMP', primary_key=True)  # Field name made lowercase.
+    ws_ms_avg = models.DecimalField(db_column='WS_ms_Avg', max_digits=6, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    winddir = models.DecimalField(db_column='WindDir', max_digits=6, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    airtc_20_avg = models.DecimalField(db_column='AirTC_20_Avg', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    rh_20 = models.DecimalField(db_column='RH_20', max_digits=6, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    airtc_15_avg = models.DecimalField(db_column='AirTC_15_Avg', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    rh_15 = models.DecimalField(db_column='RH_15', max_digits=6, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    airtc_10_avg = models.DecimalField(db_column='AirTC_10_Avg', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    rh_10 = models.DecimalField(db_column='RH_10', max_digits=6, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    airtc_5_avg = models.DecimalField(db_column='AirTC_5_Avg', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    rh_5 = models.DecimalField(db_column='RH_5', max_digits=6, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    nr_wm2_avg = models.DecimalField(db_column='NR_Wm2_Avg', max_digits=9, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    sevolt_avg = models.DecimalField(db_column='SEVolt_Avg', max_digits=7, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
+    temp_c_avg_1 = models.DecimalField(db_column='Temp_C_Avg_1', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    temp_c_avg_2 = models.DecimalField(db_column='Temp_C_Avg_2', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    temp_c_avg_3 = models.DecimalField(db_column='Temp_C_Avg_3', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    temp_c_avg_4 = models.DecimalField(db_column='Temp_C_Avg_4', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    temp_c_avg_5 = models.DecimalField(db_column='Temp_C_Avg_5', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    temp_c_avg_6 = models.DecimalField(db_column='Temp_C_Avg_6', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    result1_avg = models.DecimalField(db_column='Result1_Avg', max_digits=4, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
+    result2_avg = models.DecimalField(db_column='Result2_Avg', max_digits=4, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
+    result3_avg = models.DecimalField(db_column='Result3_Avg', max_digits=4, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
+    result4_avg = models.DecimalField(db_column='Result4_Avg', max_digits=4, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
+    result5_avg = models.DecimalField(db_column='Result5_Avg', max_digits=4, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
+    inf_data = models.DecimalField(db_column='Inf_data', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    temp_c_avg_7 = models.DecimalField(db_column='Temp_C_Avg_7', max_digits=5, decimal_places=3, blank=True, null=True)  # Field name made lowercase.
+    rain_mm_tot = models.DecimalField(db_column='Rain_mm_Tot', max_digits=6, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
+    pressure_avg = models.DecimalField(db_column='Pressure_Avg', max_digits=8, decimal_places=4, blank=True, null=True)  # Field name made lowercase.
+    receivedate = models.DateField(db_column='ReceiveDate')  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'rawdata_capa4'
 
 
 class WorkExperience(models.Model):

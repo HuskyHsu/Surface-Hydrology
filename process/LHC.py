@@ -5,6 +5,7 @@ import sys
 from SurfaceHydrology.settings_secret import create_aiomysql
 
 def formatData(file):
+
     for chunk in file.chunks():
         tem = chunk.decode().split('\r\n')
 
@@ -90,6 +91,7 @@ class siteObject(object):
                 columns = [column[0] for column in cursor.description]
                 results = []
                 for row in cursor.fetchall():
+                    row = [i.encode('utf-8') for i in row]
                     results.append(dict(zip(columns, row)))
 
             except:
@@ -234,10 +236,31 @@ class Capa4(siteObject):
     def readFile(self, file, ReceiveDate):
         lines = formatData(file)
         del lines[0:4]
-
+        print(lines[0])
         for i, line in enumerate(lines):
             TIMESTAMP = str(datetime.datetime.strptime(line[0], '"%Y-%m-%d %H:%M:%S"'))
+            print(TIMESTAMP)
+            data = [TIMESTAMP]
+            data.extend(line[2:])
 
+            data += [ReceiveDate]
+
+            lines[i] = data
+
+        self.data = lines
+        return self
+
+class NCUsite(siteObject):
+    tableName = 'ncu_site'
+    field = ["TIMESTAMP", "SEVolt_1", "SEVolt_2", "SEVolt_3", "SEVolt_4", "SEVolt_5", "Level_1", "Level_2", "Level_3", "Level_4", "Level_5", "SF10", "SF30", "SF50", "SF70", "SF100", "SF150", "SF200", "SF300", "SF400", "SF500", "TS1_P", "TS1_Temp", "T8_P", "T8_Temp", "ReceiveDate"]
+    
+    def readFile(self, file, ReceiveDate):
+        lines = formatData(file)
+        del lines[0:4]
+        print(lines[0])
+        for i, line in enumerate(lines):
+            TIMESTAMP = str(datetime.datetime.strptime(line[0], '"%Y-%m-%d %H:%M:%S"'))
+            print(TIMESTAMP)
             data = [TIMESTAMP]
             data.extend(line[2:])
 
@@ -251,3 +274,7 @@ class Capa4(siteObject):
 class Site(object):
     def create(self, typ):
         return globals()[typ]()
+
+class SiteNCU(object):
+    def create(self, typ):
+        return NCUsite()

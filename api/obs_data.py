@@ -12,7 +12,7 @@ def site_basic(request, capa):
             'success': LHC.Site().create(capa).Basic(),
             })
     else:
-        sites = ["Capa2", "Capa3", "Capa4"]
+        sites = ["Capa2", "Capa3", "Capa4", "NCUsite"]
         siteBasic = [LHC.Site().create(siteName).Basic() for siteName in sites]
 
         return JsonResponse({

@@ -1,0 +1,59 @@
+{% extends "CMS.html" %}
+
+{% block title %}
+後台-上傳檔案
+{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block container %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">中央大學測站上傳檔案</h1>
+    <!-- <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary">Share</button>
+            <button class="btn btn-sm btn-outline-secondary">Export</button>
+        </div>
+        <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+        </button>
+    </div> -->
+</div>
+
+<div class="col-md-4">
+
+<form method="post" action="/api/update/obs_datas_ncu" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>收檔日期</label>
+        <input type="date" class="form-control" value="2018-01-01" name="date">
+    </div>
+    {% for site in field %}
+    <div class="form-group">
+        <label>{{ site.name }}</label>
+        <input type="file" class="form-control-file" name="{{ site.name }}">
+        <small id="emailHelp" class="form-text text-muted">請選擇[{{ site.fileName }}]檔案</small>
+    </div>
+    {% endfor %}
+    <div class="form-group">
+        
+        <label>備註</label>
+        <textarea class="form-control" rows="2" placeholder="...暫無儲存備註"></textarea>
+    </div>
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">上傳</button>
+</form>
+</div>
+
+
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
+
+{% block Script %}
+
+{% endblock %}

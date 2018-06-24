@@ -46,7 +46,6 @@ def plans(request):
         'which': '研究計畫'
     })
 
-
 # 後台 - 上傳測站資料
 @login_required(login_url='/api/login/')
 def upload_file(request):
@@ -69,4 +68,20 @@ def upload_file(request):
     return render(request, 'CMS_upload_file.html', {
         "field": field,
         'which': '蓮華池測站資料上傳'
+    })
+
+# 後台 - 上傳測站資料
+@login_required(login_url='/api/login/')
+def upload_file_ncu(request):
+
+    field = [
+        {
+            "name": "NCU",
+            "fileName": "NCU_testyyyymmdd.dat"
+        }
+    ]
+
+    return render(request, 'CMS_upload_file_ncu.html', {
+        "field": field,
+        'which': '中央大學測站資料上傳'
     })

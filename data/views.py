@@ -4,7 +4,7 @@ from process import LHC
 # Create your views here.
 def view(request):
 
-    sites = ["Capa2", "Capa3", "Capa4"]
+    sites = ["Capa2", "Capa3", "Capa4", "NCUsite"]
 
     # siteBasic = []
     siteBasic = [LHC.Site().create(siteName).Basic() for siteName in sites]

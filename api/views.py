@@ -159,7 +159,6 @@ def plans(request):
 
     return HttpResponseRedirect('/CMS/plans')
 
-
 # 上傳檔案
 def upload_file(request):
     # POST and have file
@@ -188,3 +187,32 @@ def upload_file(request):
     else:
         print('QQ')
         return HttpResponseRedirect('/CMS/upload_file')
+
+# 上傳檔案
+def upload_file_ncu(request):
+    # POST and have file
+    if request.method == 'POST' and request.FILES != {}:
+
+        # OPEN async
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        # loop = asyncio.get_event_loop()
+
+        # create coroutine object
+        tasks = [asyncio.ensure_future(
+            LHC.SiteNCU().create(file)
+                .readFile( request.FILES[file], request.POST["date"] )
+                .asyncInsert(loop)
+            ) for file in request.FILES.keys()]
+
+        # run async
+        loop.run_until_complete(asyncio.wait(tasks))
+
+        # get return value
+        success = [task.result() for task in tasks]
+        print(success)
+        return HttpResponseRedirect('/CMS/upload_file_ncu')
+
+    else:
+        print('QQ')
+        return HttpResponseRedirect('/CMS/upload_file_ncu')

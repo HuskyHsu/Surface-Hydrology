@@ -55,7 +55,13 @@ var app = new Vue({
             svg.selectAll("g").remove();
             var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-            var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
+            if (data[0].TIMESTAMP.indexOf("Z") > 0){
+                var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
+            }
+            else{
+                var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S");
+            }
+            
             // 2015-05-10T05:30:00
             var x = d3.scaleTime()
                 .rangeRound([0, width]);
